@@ -18,28 +18,11 @@
 2. ⚙️ [Tech Stack](#tech-stack)
 3. 🔋 [Features](#features)
 4. 🤸 [Quick Start](#quick-start)
-5. 🕸️ [Snippets (Code to Copy)](#snippets)
-6. 🔗 [Assets](#links)
-7. 🚀 [More](#more)
 
 ## <a name="introduction">🤖 Introduction</a>
 
 **Code Craft** is a powerful online integrated development environment (IDE) built with modern technologies to streamline coding and collaboration. Designed for developers, it supports multi-language programming, offers advanced customization, and provides a seamless coding experience. 
 
-### Key Features
-
-- **🚀 Cutting-Edge Tech Stack**: Built with Next.js 15, Convex, Clerk, and TypeScript.
-- **💻 Multi-Language Support**: Code in 10 different programming languages.
-- **🎨 Customizable Experience**: Choose from 5 VSCode-inspired themes.
-- **✨ Smart Output Handling**: Display Success & Error states for code execution.
-- **💎 Flexible Pricing**: Free and Pro plans tailored to your needs.
-- **🤝 Community-Driven Sharing**: Share and discover code snippets.
-- **🔍 Advanced Search**: Filter and search for specific snippets or projects.
-- **👤 Personal Profiles**: Track execution history and user statistics.
-- **📊 Dashboard**: View comprehensive usage statistics.
-- **⚙️ Font Size Control**: Customize your coding experience.
-- **🔗 Webhook Integration**: Seamlessly connect with external tools.
-- **🌟 Deployment Guide**: Step-by-step instructions for deploying your app.
 
 ### <a name="tech-stack">⚙️ Tech Stack</a>
 - **React 19**
@@ -51,7 +34,22 @@
 - **Sentry**: Offers Error & Bug Tracking.
 - **Lemon Squeezy**: For payment.
 
-## Getting Started
+## <a name="features">🔋 Features</a>
+
+👉 **🚀 Cutting-Edge Tech Stack**: Built with Next.js 15, Convex, Clerk, and TypeScript.
+👉 **💻 Multi-Language Support**: Code in 10 different programming languages.
+👉 **🎨 Customizable Experience**: Choose from 5 VSCode-inspired themes.
+👉 **✨ Smart Output Handling**: Display Success & Error states for code execution.
+👉 **💎 Flexible Pricing**: Free and Pro plans tailored to your needs.
+👉 **🤝 Community-Driven Sharing**: Share and discover code snippets.
+👉 **🔍 Advanced Search**: Filter and search for specific snippets or projects.
+👉 **👤 Personal Profiles**: Track execution history and user statistics.
+👉 **📊 Dashboard**: View comprehensive usage statistics.
+👉 **⚙️ Font Size Control**: Customize your coding experience.
+👉 **🔗 Webhook Integration**: Seamlessly connect with external tools.
+👉 **🌟 Deployment Guide**: Step-by-step instructions for deploying your app.
+
+## <a name="quick-start">🤸 Quick Start</a>
 
 ### Prerequisites
 
