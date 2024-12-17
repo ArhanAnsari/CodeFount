@@ -12,6 +12,8 @@
 <img src="https://img.shields.io/badge/-Sanity-black?style=for-the-badge&logoColor=white&logo=sanity&color=F03E2F" alt="sanity" />
 <img src="https://img.shields.io/badge/-Lemon_Squeezy-black?style=for-the-badge&logoColor=white&logo=lemonsqueezy&color=FCD34D" alt="lemon squeezy" />
 
+<h3 align="center">CodeFount - An Online IDE</h3>
+
 ## 📋 <a name="table">Table of Contents</a>
 
 1. 🤖 [Introduction](#introduction)
