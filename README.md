@@ -9,7 +9,10 @@
 <img src="https://img.shields.io/badge/-Typescript-black?style=for-the-badge&logoColor=white&logo=react&color=3178C6" alt="typescript" />
 <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextdotjs" />
 <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
-<img src="https://img.shields.io/badge/-Sanity-black?style=for-the-badge&logoColor=white&logo=sanity&color=F03E2F" alt="sanity" />
+<img src="https://img.shields.io/badge/-Clerk-black?style=for-the-badge&logoColor=white&logo=clerk&color=00B8D9" alt="Clerk" />
+<img src="https://img.shields.io/badge/-Convex-black?style=for-the-badge&logoColor=white&logo=convex&color=FF9900" alt="Convex" />
+<img src="https://img.shields.io/badge/-EmailJS-black?style=for-the-badge&logoColor=white&logo=email&color=F1502F" alt="EmailJS" />
+<img src="https://img.shields.io/badge/-Sentry-black?style=for-the-badge&logoColor=white&logo=sentry&color=362D59" alt="Sentry" />
 <img src="https://img.shields.io/badge/-Lemon_Squeezy-black?style=for-the-badge&logoColor=white&logo=lemonsqueezy&color=FCD34D" alt="lemon squeezy" />
 
 <h3 align="center">CodeFount - An Online IDE</h3>
