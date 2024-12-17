@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import CustomCursor from "@/components/CustomCursor";
 import { Cursor } from "@/components/CursorFollower";
+import { Analytics } from "@vercel/analytics/react"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,7 +24,7 @@ const geistMono = localFont({
 const karla = Karla({ subsets: ['latin'], variable: "--font-karla" })
 
 export const metadata: Metadata = {
-  title: "Code Craft",
+  title: "CodeFount",
   description: "Share and run code snippets",
 };
 
@@ -46,6 +47,7 @@ export default function RootLayout({
           <Toaster />
         </body>
       </html>
+      <Analytics />
     </ClerkProvider>
   );
 }
