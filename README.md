@@ -37,6 +37,7 @@
 - **TypeScript**: Ensures type safety and improved developer experience.
 - **Tailwind CSS**: Offers a customizable and responsive UI.
 - **Sentry**: Offers Error & Bug Tracking.
+- **EmailJS**: For emailing feature in support page.
 - **Lemon Squeezy**: For payment.
 
 ## <a name="features">🔋 Features</a>
@@ -68,8 +69,8 @@ To run this project, ensure you have the following installed:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/ArhanAnsari/CodeCraft.git
-   cd CodeCraft
+   git clone https://github.com/ArhanAnsari/CodeFount.git
+   cd CodeFount
    ```
 
 2. Install dependencies:
