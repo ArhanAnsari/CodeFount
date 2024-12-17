@@ -81,7 +81,7 @@ function OutputPanel() {
                 <Clock className="w-6 h-6" />
               </div>
               <p className="text-center">Run your code to see the output here...</p>
-              <p className="text-center">To run your code you will need to be PRO...</p>
+              {/* <p className="text-center">To run your code you will need to be PRO...</p> */}
             </div>
           )}
         </div>
