@@ -1,4 +1,4 @@
-# Code Craft - SaaS Code Editor - Next.js 15
+# CodeFount - SaaS Code Editor - Next.js 15
 
 ![Demo App](/public/screenshot-for-readme.png)
 ![Next.js](https://img.shields.io/badge/Next.js-15.0-blue)
@@ -21,11 +21,11 @@
 
 ## <a name="introduction">🤖 Introduction</a>
 
-**Code Craft** is a powerful online integrated development environment (IDE) built with modern technologies to streamline coding and collaboration. Designed for developers, it supports multi-language programming, offers advanced customization, and provides a seamless coding experience. 
+**CodeFount** is a powerful online integrated development environment (IDE) built with modern technologies to streamline coding and collaboration. Designed for developers, it supports multi-language programming, offers advanced customization, and provides a seamless coding experience. 
 
 
 ### <a name="tech-stack">⚙️ Tech Stack</a>
-- **React 19**
+- **React 19**: The foundation of the project, ensuring high performance and scalability.
 - **Next.js 15**: The foundation of the project, ensuring high performance and scalability.
 - **Convex**: Provides a robust backend for real-time data handling.
 - **Clerk**: Simplifies user authentication and management.
@@ -36,18 +36,18 @@
 
 ## <a name="features">🔋 Features</a>
 
-👉 **🚀 Cutting-Edge Tech Stack**: Built with Next.js 15, Convex, Clerk, and TypeScript.
-👉 **💻 Multi-Language Support**: Code in 10 different programming languages.
-👉 **🎨 Customizable Experience**: Choose from 5 VSCode-inspired themes.
-👉 **✨ Smart Output Handling**: Display Success & Error states for code execution.
-👉 **💎 Flexible Pricing**: Free and Pro plans tailored to your needs.
-👉 **🤝 Community-Driven Sharing**: Share and discover code snippets.
-👉 **🔍 Advanced Search**: Filter and search for specific snippets or projects.
-👉 **👤 Personal Profiles**: Track execution history and user statistics.
-👉 **📊 Dashboard**: View comprehensive usage statistics.
-👉 **⚙️ Font Size Control**: Customize your coding experience.
-👉 **🔗 Webhook Integration**: Seamlessly connect with external tools.
-👉 **🌟 Deployment Guide**: Step-by-step instructions for deploying your app.
+👉 - **🚀 Cutting-Edge Tech Stack**: Built with Next.js 15, Convex, Clerk, and TypeScript.
+👉 - **💻 Multi-Language Support**: Code in 10 different programming languages.
+👉 - **🎨 Customizable Experience**: Choose from 5 VSCode-inspired themes.
+👉 - **✨ Smart Output Handling**: Display Success & Error states for code execution.
+👉 - **💎 Flexible Pricing**: Free and Pro plans tailored to your needs.
+👉 - **🤝 Community-Driven Sharing**: Share and discover code snippets.
+👉 - **🔍 Advanced Search**: Filter and search for specific snippets or projects.
+👉 - **👤 Personal Profiles**: Track execution history and user statistics.
+👉 - **📊 Dashboard**: View comprehensive usage statistics.
+👉 - **⚙️ Font Size Control**: Customize your coding experience.
+👉 - **🔗 Webhook Integration**: Seamlessly connect with external tools.
+👉 - **🌟 Deployment Guide**: Step-by-step instructions for deploying your app.
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
@@ -113,6 +113,13 @@ To run this project, ensure you have the following installed:
      ```
    - Copy the Convex deployment URL and add it to your `.env` file under `CONVEX_DEPLOYMENT`.
 
+   - Or simply run:
+   ```shell
+   npx convex dev
+   ```
+
+   Then follow the instruction
+
 ### Running the Application
 
 Start the development server:
@@ -147,4 +154,4 @@ For any issues or feature requests, please [open an issue](https://github.com/Ar
 
 ---
 
-Enjoy using the Code Craft! 🚀
+Enjoy using the CodeFount! 🚀

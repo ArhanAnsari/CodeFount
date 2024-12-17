@@ -34,7 +34,7 @@ export default withSentryConfig(withSentryConfig(nextConfig, {
 // https://github.com/getsentry/sentry-webpack-plugin#options
 
 org: "arhanansari",
-project: "code-craft",
+project: "codefount",
 
 // Only print logs for uploading source maps in CI
 silent: !process.env.CI,
@@ -72,7 +72,7 @@ automaticVercelMonitors: true,
 // https://github.com/getsentry/sentry-webpack-plugin#options
 
 org: "arhanansari",
-project: "code-craft",
+project: "codefount",
 
 // Only print logs for uploading source maps in CI
 silent: !process.env.CI,

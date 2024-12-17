@@ -22,6 +22,23 @@ function Footer() {
               Terms
             </Link>
           </div>
+          <div className="flex items-center gap-2 text-gray-400">
+            <Blocks className="size-5" />
+            <span><p>
+            Developed by{" "}
+            <Link
+              href="https://arhanansari.vercel.app"
+              target="_blank"
+              className="text-blue-500 hover:underline"
+            >
+              Arhan Ansari
+            </Link>
+          </p></span>
+          </div>
+        </div>
+        {/* Adding CopyRight Symbol along with current year and the name of the project CodeFount*/}
+        <div className="flex items-center gap-6 text-gray-400 text-sm mt-4">
+          <p>&copy; {new Date().getFullYear()} CodeFount. All rights reserved.</p>
         </div>
       </div>
     </footer>

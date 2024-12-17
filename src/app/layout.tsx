@@ -7,6 +7,7 @@ import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import CustomCursor from "@/components/CustomCursor";
+import { Cursor } from "@/components/CursorFollower";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,7 +39,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
           className={`${geistSans.variable} ${geistMono.variable} ${karla.className} antialiased min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 text-gray-100 flex flex-col`}
         >
-          <ConvexClientProvider><CustomCursor />{children}</ConvexClientProvider>
+          <ConvexClientProvider><CustomCursor /><Cursor />{children}</ConvexClientProvider>
 
           <Footer />
 
