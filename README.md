@@ -1,10 +1,10 @@
 # CodeFount - SaaS Code Editor - Next.js 15
 
 ![Demo App](/public/screenshot-for-readme.png)
-![Next.js](https://img.shields.io/badge/Next.js-15.0-blue)
+![Next.js](https://img.shields.io/badge/Next.js-15.1.0-blue)
 ![Convex](https://img.shields.io/badge/Convex-Framework-yellow)
 ![Clerk](https://img.shields.io/badge/Clerk-Authentication-green)
-![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 
 <img src="https://img.shields.io/badge/-Typescript-black?style=for-the-badge&logoColor=white&logo=react&color=3178C6" alt="typescript" />
 <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextdotjs" />
