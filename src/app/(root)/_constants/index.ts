@@ -216,7 +216,7 @@ func main() {
     label: "C",
     logoPath: "/c.png",
     pistonRuntime: {language: "c", version: "10.2.0" },
-    MonacoLanguage: "c",
+    monacoLanguage: "c",
     defaultCode: `#include <stdio.h>
 
 int main() {
@@ -229,7 +229,7 @@ int main() {
     for (int i = 0; i < size; i++) {
         printf("%d ", numbers[i]);
     }
-    printf("\n");
+    printf("");
     
     // Calculate squares
     int squares[size];
@@ -241,7 +241,7 @@ int main() {
     for (int i = 0; i < size; i++) {
         printf("%d ", squares[i]);
     }
-    printf("\n");
+    printf("");
     
     // Filter even numbers
     printf("Even numbers: ");
@@ -250,14 +250,14 @@ int main() {
             printf("%d ", numbers[i]);
         }
     }
-    printf("\n");
+    printf("");
     
     // Calculate sum
     int sum = 0;
     for (int i = 0; i < size; i++) {
         sum += numbers[i];
     }
-    printf("Sum of numbers: %d\n", sum);
+    printf("Sum of numbers: %d", sum);
     
     return 0;
 }`,
