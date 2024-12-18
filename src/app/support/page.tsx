@@ -72,8 +72,8 @@ const ContactSection = () => {
               />
               <button
                 disabled={state.submitting}
-                className="bg-indigo-500 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16 hover:bg-indigo-600"
-              >
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg
+             transition-all duration-200 font-medium shadow-lg shadow-blue-500/20">
                 Submit
               </button>
             </form>
