@@ -28,7 +28,7 @@ const ContactSection = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="text-center">
-        <h2 className="text-3xl md:text-5xl font-bold">Contact me</h2>
+        <h2 className="text-3xl md:text-5xl font-bold">Contact Us</h2>
         <div className="mt-8 p-8 rounded-md bg-gray-800 bg-opacity-75 w-96 max-w-full">
           {state.succeeded ? (
             <p className="text-gray-300 text-center">Thanks for your message!</p>
