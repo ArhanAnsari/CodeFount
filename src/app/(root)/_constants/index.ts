@@ -211,6 +211,29 @@ func main() {
     println!("Sum of numbers: {}", sum);
 }`,
   },
+  r: {
+    id: "r",
+    label: "R",
+    logoPath: "/r.png",
+    pistonRuntime: { language: "rscript", version: "4.1.1" },
+    monacoLanguage: "r",
+    defaultCode: `# Define the numbers vector
+numbers <- c(1, 2, 3, 4, 5)
+
+# Map numbers to their squares
+squares <- sapply(numbers, function(n) n^2)
+cat("Original numbers:", numbers, "\n")
+cat("Squared numbers:", squares, "\n")
+
+# Filter for even numbers
+evenNumbers <- numbers[numbers %% 2 == 0]
+cat("Even numbers:", evenNumbers, "\n")
+
+# Calculate sum using reduce
+sum <- sum(numbers)
+cat("Sum of numbers:", sum, "\n")
+`,
+  },
   c: {
     id: "c",
     label: "C",

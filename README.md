@@ -42,18 +42,20 @@
 
 ## <a name="features">🔋 Features</a>
 
-👉 - **🚀 Cutting-Edge Tech Stack**: Built with Next.js 15, Convex, Clerk, and TypeScript.
-👉 - **💻 Multi-Language Support**: Code in 10 different programming languages.
-👉 - **🎨 Customizable Experience**: Choose from 5 VSCode-inspired themes.
-👉 - **✨ Smart Output Handling**: Display Success & Error states for code execution.
-👉 - **💎 Flexible Pricing**: Free and Pro plans tailored to your needs.
-👉 - **🤝 Community-Driven Sharing**: Share and discover code snippets.
-👉 - **🔍 Advanced Search**: Filter and search for specific snippets or projects.
-👉 - **👤 Personal Profiles**: Track execution history and user statistics.
-👉 - **📊 Dashboard**: View comprehensive usage statistics.
-👉 - **⚙️ Font Size Control**: Customize your coding experience.
-👉 - **🔗 Webhook Integration**: Seamlessly connect with external tools.
-👉 - **🌟 Deployment Guide**: Step-by-step instructions for deploying your app.
+- 👉 **🚀 Cutting-Edge Tech Stack**: Built with Next.js 15, Convex, Clerk, and TypeScript.
+- 👉 **💻 Multi-Language Support**: Code in 12 different programming languages.
+- 👉 **🎨 Customizable Experience**: Choose from 5 VSCode-inspired themes.
+- 👉 **✨ Smart Output Handling**: Display Success & Error states for code execution.
+- 👉 **💎 Flexible Pricing**: Free and Pro plans tailored to your needs.
+- 👉 **🤝 Community-Driven Sharing**: Share and discover code snippets.
+- 👉 **🔍 Advanced Search**: Filter and search for specific snippets or projects.
+- 👉 **👤 Personal Profiles**: Track execution history and user statistics.
+- 👉 **📊 Dashboard**: View comprehensive usage statistics.
+- 👉 **📝 Custom Cursor**: Custom Cursor for all devices.
+- 👉 **📊 Mouse Follower**: Mouse Follower for all devices (except mobile).
+- 👉 **⚙️ Font Size Control**: Customize your coding experience.
+- 👉 **🔗 Webhook Integration**: Seamlessly connect with external tools.
+- 👉 **🌟 Deployment Guide**: Step-by-step instructions for deploying your app.
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
