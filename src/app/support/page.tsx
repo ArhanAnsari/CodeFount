@@ -1,12 +1,21 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { ValidationError, useForm } from "@formspree/react";
 
 const ContactSection = () => {
   const [state, handleSubmit] = useForm("mayzgjbd");
   const form = useRef();
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const handleInputChange = () => {
+    // Check if all required fields are valid
+    const formElement = form.current;
+    if (formElement) {
+      setIsFormValid(formElement.checkValidity());
+    }
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -33,23 +42,25 @@ const ContactSection = () => {
           {state.succeeded ? (
             <p className="text-gray-300 text-center">Thanks for your message!</p>
           ) : (
-            <form ref={form} onSubmit={sendEmail}>
+            <form ref={form} onSubmit={sendEmail} onChange={handleInputChange}>
               <label htmlFor="name" className="font-medium text-gray-300 block mb-1">
-                Name
+                <span className="text-red-500">*</span> Name
               </label>
               <input
                 type="text"
                 name="user_name"
                 id="name"
+                required
                 className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-700 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500 p-3"
               />
               <label htmlFor="email" className="font-medium text-gray-300 block mb-1 mt-8">
-                Email
+                <span className="text-red-500">*</span> Email
               </label>
               <input
                 type="email"
                 name="user_email"
                 id="email"
+                required
                 className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-700 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500 p-3"
               />
               <ValidationError
@@ -59,11 +70,12 @@ const ContactSection = () => {
                 errors={state.errors}
               />
               <label htmlFor="message" className="font-medium text-gray-300 block mb-1 mt-8">
-                Message
+                <span className="text-red-500">*</span> Message
               </label>
               <textarea
                 name="message"
                 id="message"
+                required
                 className="h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-700 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500 p-3"
               />
               <ValidationError
@@ -71,9 +83,14 @@ const ContactSection = () => {
                 errors={state.errors}
               />
               <button
-                disabled={state.submitting}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg
-             transition-all duration-200 font-medium shadow-lg shadow-blue-500/20">
+                type="submit"
+                disabled={!isFormValid || state.submitting}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 font-medium shadow-lg ${
+                  isFormValid
+                    ? "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-blue-500/20"
+                    : "bg-gray-600 text-gray-300 cursor-not-allowed"
+                }`}
+              >
                 Submit
               </button>
             </form>
