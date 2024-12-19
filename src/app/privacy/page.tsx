@@ -1,10 +1,13 @@
 // src/app/privacy/page.tsx
 
 import React from "react";
+import NavigationHeader from "@/components/NavigationHeader";
 
 const PrivacyPage: React.FC = () => {
   return (
-    <main style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <>
+      <NavigationHeader />
+      <main style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <h1>Privacy Policy</h1>
       <p>
         At CodeFount, we value your privacy and are committed to protecting your personal data. This policy explains how we collect, use, and safeguard your information.
@@ -22,7 +25,8 @@ const PrivacyPage: React.FC = () => {
         If you have any questions regarding our privacy policy, please contact us at arhanansari2009@gmail.com.
       </p>
     </main>
-  );
-};
+      );
+      };
+    </>
 
 export default PrivacyPage;
