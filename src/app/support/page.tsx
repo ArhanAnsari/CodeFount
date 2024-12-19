@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { ValidationError, useForm } from "@formspree/react";
+import NavigationHeader from "@/components/NavigationHeader";
 
 const ContactSection = () => {
   const [state, handleSubmit] = useForm("mayzgjbd");
@@ -36,6 +37,7 @@ const ContactSection = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      <NavigationHeader />
       <div className="text-center">
         <h2 className="text-3xl md:text-5xl font-bold">Contact Us</h2>
         <div className="mt-8 p-8 rounded-md bg-gray-800 bg-opacity-75 w-96 max-w-full">
