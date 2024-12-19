@@ -360,6 +360,114 @@ class Program {
     }
 }`,
   },
+  php: {
+    id: "php",
+    label: "PHP",
+    logoPath: "/php.png",
+    pistonRuntime: {language: "php", version: "8.2.3" },
+    monacoLanguage: "php",
+    defaultCode: `<?php
+$numbers = [1, 2, 3, 4, 5];
+
+// Map numbers to their squares
+$squares = array_map(function($n) {
+    return $n * $n;
+}, $numbers);
+echo "Original numbers: " . implode(", ", $numbers) . PHP_EOL;
+echo "Squared numbers: " . implode(", ", $squares) . PHP_EOL;
+
+// Filter for even numbers
+$evenNumbers = array_filter($numbers, function($n) {
+    return $n % 2 === 0;
+});
+echo "Even numbers: " . implode(", ", $evenNumbers) . PHP_EOL;
+
+// Calculate sum using reduce
+$sum = array_reduce($numbers, function($acc, $curr) {
+    return $acc + $curr;
+}, 0);
+echo "Sum of numbers: $sum" . PHP_EOL;
+?>`,
+  },
+  pascal: {
+    id: "pascal",
+    label: "Pascal",
+    logoPath: "/pascal.png",
+    pistonRuntime: { language: "pascal", version: "3.2.2"},
+    monacoLanguage: "pascal",
+    defaultCode: `program Playground;
+
+uses
+  SysUtils;
+
+var
+  numbers: array[1..5] of Integer = (1, 2, 3, 4, 5);
+  squares: array[1..5] of Integer;
+  evenNumbers: array[1..5] of Integer;
+  i, count, sum: Integer;
+
+begin
+  // Map numbers to their squares
+  for i := 1 to 5 do
+    squares[i] := numbers[i] * numbers[i];
+
+  Write('Original numbers: ');
+  for i := 1 to 5 do
+    Write(numbers[i], ' ');
+  WriteLn;
+
+  Write('Squared numbers: ');
+  for i := 1 to 5 do
+    Write(squares[i], ' ');
+  WriteLn;
+
+  // Filter for even numbers
+  count := 0;
+  for i := 1 to 5 do
+    if numbers[i] mod 2 = 0 then
+    begin
+      Inc(count);
+      evenNumbers[count] := numbers[i];
+    end;
+
+  Write('Even numbers: ');
+  for i := 1 to count do
+    Write(evenNumbers[i], ' ');
+  WriteLn;
+
+  // Calculate sum using reduce
+  sum := 0;
+  for i := 1 to 5 do
+    sum := sum + numbers[i];
+
+  WriteLn('Sum of numbers: ', sum);
+end.`,
+  },
+  perl: {
+    id: "perl",
+    label: "Perl",
+    logoPath: "/perl.png",
+    pistonRuntime: { language: "perl", version: "5.36.0" },
+    monacoLanguage: "perl",
+    defaultCode: `use strict;
+use warnings;
+
+my @numbers = (1, 2, 3, 4, 5);
+
+# Map numbers to their squares
+my @squares = map { $_ * $_ } @numbers;
+print "Original numbers: ", join(", ", @numbers), "\n";
+print "Squared numbers: ", join(", ", @squares), "\n";
+
+# Filter for even numbers
+my @even_numbers = grep { $_ % 2 == 0 } @numbers;
+print "Even numbers: ", join(", ", @even_numbers), "\n";
+
+# Calculate sum using reduce
+use List::Util qw(reduce);
+my $sum = reduce { $a + $b } @numbers;
+print "Sum of numbers: $sum\n";`,
+  },
   ruby: {
     id: "ruby",
     label: "Ruby",
