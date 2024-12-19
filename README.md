@@ -43,7 +43,7 @@
 ## <a name="features">🔋 Features</a>
 
 - **🚀 Cutting-Edge Tech Stack**: Built with Next.js 15, Convex, Clerk, and TypeScript.
-- **💻 Multi-Language Support**: Code in 12 different programming languages.
+- **💻 Multi-Language Support**: Code in 15 different programming languages.
 - **🎨 Customizable Experience**: Choose from 5 VSCode-inspired themes.
 - **✨ Smart Output Handling**: Display Success & Error states for code execution.
 - **💎 Flexible Pricing**: Free and Pro plans tailored to your needs.
