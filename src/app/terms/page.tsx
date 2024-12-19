@@ -1,9 +1,12 @@
 // src/app/terms/page.tsx
 
 import React from "react";
+import NavigationHeader from "@/components/NavigationHeader";
 
 const TermsPage: React.FC = () => {
   return (
+    <>
+    <NavigationHeader />
     <main style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <h1>Terms and Conditions</h1>
       <p>
@@ -22,7 +25,8 @@ const TermsPage: React.FC = () => {
         If you have any questions about our terms, please contact us at arhanansari2009@gmail.com.
       </p>
     </main>
-  );
-};
+      );
+      };
+    </>
 
 export default TermsPage;
