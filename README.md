@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
 <img src="https://img.shields.io/badge/-Clerk-black?style=for-the-badge&logoColor=white&logo=clerk&color=00B8D9" alt="Clerk" />
 <img src="https://img.shields.io/badge/-Convex-black?style=for-the-badge&logoColor=white&logo=convex&color=FF9900" alt="Convex" />
-<img src="https://img.shields.io/badge/-EmailJS-black?style=for-the-badge&logoColor=white&logo=email&color=F1502F" alt="EmailJS" />
+<img src="https://img.shields.io/badge/-EmailJS-black?style=for-the-badge&logoColor=white&logo=emailjs&color=F1502F" alt="EmailJS" />
 <img src="https://img.shields.io/badge/-Sentry-black?style=for-the-badge&logoColor=white&logo=sentry&color=362D59" alt="Sentry" />
 <img src="https://img.shields.io/badge/-Lemon_Squeezy-black?style=for-the-badge&logoColor=white&logo=lemonsqueezy&color=FCD34D" alt="lemon squeezy" />
 
@@ -158,7 +158,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Support
 
-For any issues or feature requests, please [open an issue](https://github.com/ArhanAnsari/CodeCraft/issues) in the repository.
+For any issues or feature requests, please [open an issue](https://github.com/ArhanAnsari/CodeFount/issues) in the repository.
 
 ---
 
