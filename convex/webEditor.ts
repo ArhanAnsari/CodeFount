@@ -2,7 +2,7 @@ import { query, mutation } from './_generated/server';
 import sanitizeHtml from 'sanitize-html'; // Use to sanitize HTML and avoid XSS attacks
 
 // Fetch user content
-export const fetchContent = query(async ({ db }, userId: string) => {
+export const fetchContent = query(async ({ db }, { userId }: { userId: string }) => {
   const content = await db
     .table('webEditorContent')
     .index('by_user_id')
