@@ -4,9 +4,8 @@ import sanitizeHtml from 'sanitize-html'; // Use to sanitize HTML and avoid XSS 
 // Fetch user content
 export const fetchContent = query(async ({ db }, { userId }: { userId: string }) => {
   const content = await db
-    .table('webEditorContent')
-    .index('by_user_id')
-    .filter((q) => q.eq(q.field('userId'), userId))
+    .query('webEditorContent')
+    .withIndex('by_user_id', (q) => q.eq('userId', userId))
     .first();
 
   return content || { html: '', css: '', js: '', updatedAt: Date.now() };
@@ -16,10 +15,12 @@ export const fetchContent = query(async ({ db }, { userId }: { userId: string })
 const validateAndSanitize = (html: string, css: string, js: string) => {
   const sanitizedHtml = sanitizeHtml(html, {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['script']),
-    allowedAttributes: false,
+    allowedAttributes: {
+      '*': ['style', 'class'], // Allow global attributes
+    },
   });
-  const sanitizedCss = css.replace(/<|>/g, ''); // Basic sanitization for CSS
-  const sanitizedJs = js.replace(/<|>/g, ''); // Basic sanitization for JS
+  const sanitizedCss = css.replace(/[<>]/g, ''); // Basic sanitization for CSS
+  const sanitizedJs = js.replace(/[<>]/g, ''); // Basic sanitization for JS
   return { sanitizedHtml, sanitizedCss, sanitizedJs };
 };
 
@@ -30,9 +31,8 @@ export const saveContent = mutation(
     const updatedAt = Date.now();
 
     const existingContent = await db
-      .table('webEditorContent')
-      .index('by_user_id')
-      .filter((q) => q.eq(q.field('userId'), userId))
+      .query('webEditorContent')
+      .withIndex('by_user_id', (q) => q.eq('userId', userId))
       .first();
 
     if (existingContent) {
