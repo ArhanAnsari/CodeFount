@@ -18,6 +18,7 @@ import type * as http from "../http.js";
 import type * as lemonSqueezy from "../lemonSqueezy.js";
 import type * as snippets from "../snippets.js";
 import type * as users from "../users.js";
+import type * as webEditor from "../webEditor.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -33,6 +34,7 @@ declare const fullApi: ApiFromModules<{
   lemonSqueezy: typeof lemonSqueezy;
   snippets: typeof snippets;
   users: typeof users;
+  webEditor: typeof webEditor;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

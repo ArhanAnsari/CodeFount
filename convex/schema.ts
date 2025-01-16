@@ -1,9 +1,9 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema, defineTable } from 'convex/server';
+import { v } from 'convex/values';
 
 export default defineSchema({
   users: defineTable({
-    userId: v.string(), // clerkId
+    userId: v.string(), // Clerk ID
     email: v.string(),
     name: v.string(),
     isPro: v.boolean(),
@@ -42,4 +42,12 @@ export default defineSchema({
     .index("by_user_id", ["userId"])
     .index("by_snippet_id", ["snippetId"])
     .index("by_user_id_and_snippet_id", ["userId", "snippetId"]),
+
+  webEditorContent: defineTable({
+    userId: v.string(), // Clerk ID
+    html: v.optional(v.string()),
+    css: v.optional(v.string()),
+    js: v.optional(v.string()),
+    updatedAt: v.number(), // Timestamp
+  }).index("by_user_id", ["userId"]),
 });
