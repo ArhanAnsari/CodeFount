@@ -5,7 +5,8 @@ import EditorPanel from './EditorPanel';
 import PreviewPanel from './PreviewPanel';
 import TabBar from './TabBar';
 import { useMutation, useQuery } from 'convex/react';
-import { api } from '@/convex/_generated/api';
+//import { api } from '@/convex/_generated/api';
+import { api } from "../../../../convex/_generated/api";
 
 export default function WebEditor() {
   const userId = 'user-id-placeholder'; // Replace with Clerk's userId
