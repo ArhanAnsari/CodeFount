@@ -13,7 +13,10 @@ function Footer() {
           </div>
           <div className="flex items-center gap-6">
             <Link href="/web-editor" className="text-gray-400 hover:text-gray-300 transition-colors">
-              Web Editor
+              CodeFount Web Editor
+            </Link>
+            <Link href="/" className="text-gray-400 hover:text-gray-300 transition-colors">
+              Home
             </Link>
             <Link href="/pricing" className="text-gray-400 hover:text-gray-300 transition-colors">
               Pricing
