@@ -31,23 +31,19 @@ export default function WebEditor() {
   const [activeTab, setActiveTab] = useState('HTML');
   const [preview, setPreview] = useState('');
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
-  
-  // Use Clerk's useUser hook to fetch the current user
+
   const { user, isLoaded, isSignedIn } = useUser();
   const [userId, setUserId] = useState('');
 
-  // Fetch user data from Convex when the user is signed in
   useEffect(() => {
     if (isLoaded && isSignedIn && user?.id) {
       setUserId(user.id);
 
-      // Fetch user data from Convex
       const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
       convex.query(api.users.getUser, { userId: user.id }).catch(console.error);
     }
   }, [isLoaded, isSignedIn, user]);
 
-  // Update the preview whenever the content changes
   useEffect(() => {
     const combinedPreview = `
       <html>
@@ -71,7 +67,6 @@ export default function WebEditor() {
     `;
     setPreview(combinedPreview);
 
-    // Save content after a delay to prevent overwriting while typing
     const timeout = setTimeout(() => {
       if (userId) {
         const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -82,7 +77,6 @@ export default function WebEditor() {
     return () => clearTimeout(timeout);
   }, [html, css, js, userId]);
 
-  // Listen for console messages from the iframe
   useEffect(() => {
     const handleConsoleLog = (event: MessageEvent) => {
       if (event.data.type === 'consoleLog') {
@@ -97,18 +91,27 @@ export default function WebEditor() {
     <div className="flex flex-col h-screen">
       <NavigationHeader />
       <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="flex flex-1">
-        <EditorPanel
-          activeTab={activeTab}
-          html={html}
-          setHtml={setHtml}
-          css={css}
-          setCss={setCss}
-          js={js}
-          setJs={setJs}
-        />
-        <PreviewPanel preview={preview} />
+      <div className="flex flex-1 flex-col lg:flex-row">
+        {/* Editor Panel */}
+        <div className="flex-1 p-4 overflow-hidden lg:overflow-auto">
+          <EditorPanel
+            activeTab={activeTab}
+            html={html}
+            setHtml={setHtml}
+            css={css}
+            setCss={setCss}
+            js={js}
+            setJs={setJs}
+          />
+        </div>
+
+        {/* Preview Panel */}
+        <div className="flex-1 p-4 overflow-hidden bg-gray-200 lg:overflow-auto">
+          <PreviewPanel preview={preview} />
+        </div>
       </div>
+
+      {/* Console */}
       <div className="console bg-black text-white p-4 overflow-y-auto h-32">
         <h3 className="text-lg font-bold">Console</h3>
         {consoleLogs.map((log, index) => (
