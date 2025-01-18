@@ -33,7 +33,7 @@ const CustomCursor = () => {
     };
 
     const handleMouseOver = (e: MouseEvent) => {
-      const tagName = (e.target as HTMLElement).tagName.toLowerCase();
+      const tagName = (e.target as HTMLElement).tagName.toLowerCase() as keyof typeof CURSOR_COLORS;
       setCursorColor(CURSOR_COLORS[tagName] || CURSOR_COLORS.default);
     };
 
