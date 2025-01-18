@@ -11,7 +11,6 @@ let outlineY = 0;
 
 export const Cursor = () => {
   const cursorOutline = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const [hoverButton, setHoverButton] = useState(false);
 
   // Cursor animation function
@@ -30,24 +29,18 @@ export const Cursor = () => {
     requestAnimationFrame(animate);
   };
 
-  // Mouse movement listener
+  // Mouse movement listener for the entire document
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       mouseX = event.pageX;
       mouseY = event.pageY;
     };
 
-    const currentContainer = containerRef.current;
-    if (currentContainer) {
-      currentContainer.addEventListener("mousemove", handleMouseMove);
-    }
-
+    document.addEventListener("mousemove", handleMouseMove);
     const animationId = requestAnimationFrame(animate);
 
     return () => {
-      if (currentContainer) {
-        currentContainer.removeEventListener("mousemove", handleMouseMove);
-      }
+      document.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationId);
     };
   }, []);
@@ -70,28 +63,23 @@ export const Cursor = () => {
       }
     };
 
-    const currentContainer = containerRef.current;
-    if (currentContainer) {
-      currentContainer.addEventListener("mouseover", handleMouseOver);
-    }
+    document.addEventListener("mouseover", handleMouseOver);
 
     return () => {
-      if (currentContainer) {
-        currentContainer.removeEventListener("mouseover", handleMouseOver);
-      }
+      document.removeEventListener("mouseover", handleMouseOver);
     };
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <>
       <div
-        className={`invisible md:visible z-50 fixed -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-transform ${
+        className={`z-50 fixed -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-transform ${
           hoverButton
             ? "bg-transparent border-2 border-blue-900 w-5 h-5"
             : "bg-blue-500 w-3 h-3"
         }`}
         ref={cursorOutline}
       ></div>
-    </div>
+    </>
   );
 };
