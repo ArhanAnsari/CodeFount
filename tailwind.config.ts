@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        log: '#10b981',
+        error: '#f87171',
       },
     },
   },

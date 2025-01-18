@@ -19,3 +19,177 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Adding this as global stylesy */
+.console {
+  border-top: 1px solid #444;
+  font-family: monospace;
+}
+
+/* Global Styles */
+body {
+  background-color: #1e1e2f;
+  color: #d6dbe1;
+  font-family: 'Fira Code', monospace;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+/* Navigation Header */
+.navigation-header {
+  background-color: #1a1a2e;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.navigation-header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.navigation-header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.navigation-header .user-info img {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+/* TabBar Styles */
+.tab-bar {
+  display: flex;
+  background-color: #232541;
+  padding: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.tab-button {
+  background-color: #3b3b59;
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  color: #d6dbe1;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.tab-button.active {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  transform: scale(1.05);
+}
+
+.tab-button:hover {
+  background-color: #555a75;
+  transform: scale(1.05);
+}
+
+/* Web Editor Layout */
+.editor-layout {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.editor-panel {
+  width: 50%;
+  background-color: #25283d;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.editor-panel textarea {
+  width: 100%;
+  height: 80%;
+  background-color: #35384f;
+  color: #d6dbe1;
+  padding: 15px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.editor-panel textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+}
+
+.preview-panel {
+  width: 50%;
+  background-color: #121623;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.preview-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #333;
+}
+
+/* Console Styles */
+.console {
+  background-color: #2c2f43;
+  color: #d6dbe1;
+  padding: 20px;
+  border-top: 2px solid #444;
+  height: 200px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+.console h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #4caf50;
+}
+
+.console div {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.console div.error {
+  color: #f44336;
+}
+
+.console div.info {
+  color: #00bcd4;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .editor-layout {
+    flex-direction: column;
+  }
+
+  .editor-panel,
+  .preview-panel {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+

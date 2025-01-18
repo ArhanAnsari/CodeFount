@@ -1,5 +1,5 @@
 import { query, mutation } from './_generated/server';
-import sanitizeHtml from 'sanitize-html'; // Use to sanitize HTML and avoid XSS attacks
+import sanitizeHtml from 'sanitize-html'; // To sanitize HTML and avoid XSS attacks
 
 // Fetch user content
 export const fetchContent = query(async ({ db }, { userId }: { userId: string }) => {
@@ -14,13 +14,16 @@ export const fetchContent = query(async ({ db }, { userId }: { userId: string })
 // Validate and sanitize input
 const validateAndSanitize = (html: string, css: string, js: string) => {
   const sanitizedHtml = sanitizeHtml(html, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['script']),
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['p', 'div', 'span', 'b', 'i', 'u', 'br']),
     allowedAttributes: {
-      '*': ['style', 'class'], // Allow global attributes
+      '*': ['style'], // Allow inline styles
     },
+    allowedSchemes: ['http', 'https', 'mailto'], // Allow safe schemes
   });
-  const sanitizedCss = css.replace(/[<>]/g, ''); // Basic sanitization for CSS
-  const sanitizedJs = js.replace(/[<>]/g, ''); // Basic sanitization for JS
+
+  const sanitizedCss = css.replace(/<|>/g, ''); // Basic sanitization for CSS
+  const sanitizedJs = js.replace(/<|>/g, ''); // Basic sanitization for JS
+
   return { sanitizedHtml, sanitizedCss, sanitizedJs };
 };
 

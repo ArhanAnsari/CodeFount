@@ -1,50 +1,101 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { ConvexHttpClient } from 'convex/browser';
+import { useUser } from '@clerk/nextjs'; // Use the useUser hook from Clerk
+import { api } from '../../../convex/_generated/api';
+import NavigationHeader from '@/components/NavigationHeader';
+
 import EditorPanel from './EditorPanel';
 import PreviewPanel from './PreviewPanel';
 import TabBar from './TabBar';
-import { useMutation, useQuery } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
 
 export default function WebEditor() {
-  const userId = 'user-id-placeholder'; // Replace with Clerk's userId
-  const content = useQuery(api.webEditor.fetchContent, { userId });
-  const saveContent = useMutation(api.webEditor.saveContent);
+  const [html, setHtml] = useState('<p>Hello from CodeFount!</p>');
+  const [css, setCss] = useState(`
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
 
-  const [html, setHtml] = useState('');
-  const [css, setCss] = useState('');
-  const [js, setJs] = useState('');
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 2.5rem;
+    }
+    `);
+  const [js, setJs] = useState('console.log("Hello from CodeFount!");');
   const [activeTab, setActiveTab] = useState('HTML');
   const [preview, setPreview] = useState('');
+  const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
+  
+  // Use Clerk's useUser hook to fetch the current user
+  const { user, isLoaded, isSignedIn } = useUser();
+  const [userId, setUserId] = useState('');
 
-  // Populate state with fetched content
+  // Fetch user data from Convex when the user is signed in
   useEffect(() => {
-    if (content) {
-      setHtml(content.html || '');
-      setCss(content.css || '');
-      setJs(content.js || '');
-    }
-  }, [content]);
+    if (isLoaded && isSignedIn && user?.id) {
+      setUserId(user.id);
 
-  // Update preview and save content with debounce
+      // Fetch user data from Convex
+      const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+      convex.query(api.users.getUser, { userId: user.id }).catch(console.error);
+    }
+  }, [isLoaded, isSignedIn, user]);
+
+  // Update the preview whenever the content changes
   useEffect(() => {
     const combinedPreview = `
       <html>
-        <head><style>${css}</style></head>
-        <body>${html}<script>${js}</script></body>
-      </html>`;
+        <head>
+          <style>${css}</style>
+        </head>
+        <body>
+          ${html}
+          <script>
+            (function() {
+              const originalConsoleLog = console.log;
+              console.log = function(...args) {
+                window.parent.postMessage({ type: 'consoleLog', args }, '*');
+                originalConsoleLog.apply(console, args);
+              };
+              ${js}
+            })();
+          </script>
+        </body>
+      </html>
+    `;
     setPreview(combinedPreview);
 
+    // Save content after a delay to prevent overwriting while typing
     const timeout = setTimeout(() => {
-      saveContent({ userId, html, css, js });
-    }, 300);
+      if (userId) {
+        const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+        convex.mutation(api.webEditor.saveContent, { userId, html, css, js }).catch(console.error);
+      }
+    }, 500);
 
     return () => clearTimeout(timeout);
-  }, [html, css, js, saveContent, userId]);
+  }, [html, css, js, userId]);
+
+  // Listen for console messages from the iframe
+  useEffect(() => {
+    const handleConsoleLog = (event: MessageEvent) => {
+      if (event.data.type === 'consoleLog') {
+        setConsoleLogs((prevLogs) => [...prevLogs, ...event.data.args]);
+      }
+    };
+    window.addEventListener('message', handleConsoleLog);
+    return () => window.removeEventListener('message', handleConsoleLog);
+  }, []);
 
   return (
     <div className="flex flex-col h-screen">
+      <NavigationHeader />
       <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="flex flex-1">
         <EditorPanel
@@ -57,6 +108,12 @@ export default function WebEditor() {
           setJs={setJs}
         />
         <PreviewPanel preview={preview} />
+      </div>
+      <div className="console bg-black text-white p-4 overflow-y-auto h-32">
+        <h3 className="text-lg font-bold">Console</h3>
+        {consoleLogs.map((log, index) => (
+          <div key={index}>{log}</div>
+        ))}
       </div>
     </div>
   );

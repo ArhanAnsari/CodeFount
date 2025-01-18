@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.6.0",
+    "@clerk/nextjs": "^6.9.14",
     "@emailjs/browser": "^4.4.1",
     "@formspree/react": "^2.5.1",
     "@monaco-editor/react": "^4.6.0",
