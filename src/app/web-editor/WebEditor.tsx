@@ -5,12 +5,11 @@ import EditorPanel from './EditorPanel';
 import PreviewPanel from './PreviewPanel';
 import TabBar from './TabBar';
 import { useMutation, useQuery } from 'convex/react';
-//import { api } from '@/convex/_generated/api';
-import { api } from "../../../../convex/_generated/api";
+import { api } from '../../../convex/_generated/api';
 
 export default function WebEditor() {
   const userId = 'user-id-placeholder'; // Replace with Clerk's userId
-  const { data: content } = useQuery(api.webEditor.fetchContent, userId);
+  const content = useQuery(api.webEditor.fetchContent, { userId });
   const saveContent = useMutation(api.webEditor.saveContent);
 
   const [html, setHtml] = useState('');
@@ -19,6 +18,7 @@ export default function WebEditor() {
   const [activeTab, setActiveTab] = useState('HTML');
   const [preview, setPreview] = useState('');
 
+  // Populate state with fetched content
   useEffect(() => {
     if (content) {
       setHtml(content.html || '');
@@ -27,6 +27,7 @@ export default function WebEditor() {
     }
   }, [content]);
 
+  // Update preview and save content with debounce
   useEffect(() => {
     const combinedPreview = `
       <html>
@@ -40,7 +41,7 @@ export default function WebEditor() {
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [html, css, js, saveContent]);
+  }, [html, css, js, saveContent, userId]);
 
   return (
     <div className="flex flex-col h-screen">
