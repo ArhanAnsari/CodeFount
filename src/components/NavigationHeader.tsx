@@ -34,7 +34,7 @@ function NavigationHeader() {
           </div>
 
           {/* Links */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/snippets"
               className="flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 hover:bg-blue-500/10 
@@ -51,41 +51,33 @@ function NavigationHeader() {
               <Code2 className="w-4 h-4" />
               <span className="text-sm font-medium">CodeFount Web Editor</span>
             </Link>
+            <Link
+              href="/pricing"
+              className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-amber-500/20
+              hover:border-amber-500/40 bg-gradient-to-r from-amber-500/10 to-orange-500/10
+              hover:from-amber-500/20 hover:to-orange-500/20 transition-all duration-300"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400 hover:text-amber-300" />
+              <span className="text-sm font-medium text-amber-400/90 hover:text-amber-300">
+                Pro
+              </span>
+            </Link>
           </div>
 
-          {/* Right Section */}
+          {/* Profile Section */}
           <div className="flex items-center gap-4">
             <SignedOut>
               <Link
-                href="/pricing"
-                className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-amber-500/20
-                hover:border-amber-500/40 bg-gradient-to-r from-amber-500/10 to-orange-500/10
-                hover:from-amber-500/20 hover:to-orange-500/20 transition-all duration-300"
+                href="/sign-in"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 hover:bg-blue-500/10 
+                border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
               >
-                <Sparkles className="w-4 h-4 text-amber-400 hover:text-amber-300" />
-                <span className="text-sm font-medium text-amber-400/90 hover:text-amber-300">
-                  Pro
-                </span>
+                <Sparkles className="w-4 h-4" />
+                <span className="text-sm font-medium">Sign In</span>
               </Link>
             </SignedOut>
             <HeaderProfileBtn />
           </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className="md:hidden flex items-center justify-between">
-          <Link
-            href="/web-editor"
-            className="text-sm text-gray-400 hover:text-white transition-all"
-          >
-            Web Editor
-          </Link>
-          <Link
-            href="/pricing"
-            className="text-sm text-gray-400 hover:text-white transition-all"
-          >
-            Pricing
-          </Link>
         </div>
       </div>
     </div>
