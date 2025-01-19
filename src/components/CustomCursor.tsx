@@ -1,7 +1,5 @@
-//src/components/custom-cursor.tsx
-/* eslint-disable */
 "use client";
-
+/* eslint-disable */
 import React, { useEffect, useRef, useState } from "react";
 
 const CURSOR_COLORS = {
@@ -17,14 +15,22 @@ const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [cursorColor, setCursorColor] = useState("sky-500");
   const [clicked, setClicked] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    // Detect touch devices
-    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    const handleMouseMove = (e: MouseEvent | TouchEvent) => {
+      let clientX: number, clientY: number;
+
+      if (e instanceof MouseEvent) {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      } else {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      }
+
+      setPosition({ x: clientX, y: clientY });
     };
 
     const handleMouseDown = () => {
@@ -38,14 +44,15 @@ const CustomCursor = () => {
     };
 
     const handleScroll = () => {
-      // Repaint cursor on scroll
       if (cursorRef.current) {
         cursorRef.current.style.top = `${position.y}px`;
         cursorRef.current.style.left = `${position.x}px`;
       }
     };
 
-    if (!isTouchDevice) {
+    if (isTouchDevice) {
+      window.addEventListener("touchmove", handleMouseMove);
+    } else {
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mousedown", handleMouseDown);
       document.addEventListener("mouseover", handleMouseOver);
@@ -53,18 +60,16 @@ const CustomCursor = () => {
     }
 
     return () => {
-      if (!isTouchDevice) {
+      if (isTouchDevice) {
+        window.removeEventListener("touchmove", handleMouseMove);
+      } else {
         document.removeEventListener("mousemove", handleMouseMove);
         document.removeEventListener("mousedown", handleMouseDown);
         document.removeEventListener("mouseover", handleMouseOver);
         window.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [isTouchDevice, position]);
-
-  if (isTouchDevice) {
-    return null; // Don't render cursor on touch devices
-  }
+  }, [position]);
 
   return (
     <>
