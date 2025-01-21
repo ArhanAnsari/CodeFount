@@ -15,36 +15,37 @@ type LanguageConfig = Record<
 
 export const LANGUAGE_CONFIG: LanguageConfig = {
   bash: {
-    id: "bash",
-    label: "bash",
-    logoPath: "/bash.png",
-    pistonRuntime: { language: "bash", version: "5.2.0" },
-    monacoLanguage: "bash",
-    defaultCode: `#Bash Playground
-    numbers=(1 2 3 4 5)
-    # Map numbers to their squares
-    squares=()
-    for n in "${numbers[@]}";
-                do squares+=($((n * n)))
-    done
-    echo "Original numbers: ${numbers[@]}"
-    echo "Squared numbers: ${squares[@]}"
-    # Filter even numbers
-    evenNumbers=()
-    for n in "${numbers[@]}"; do
-      if ((n % 2 == 0)); then
-        evenNumbers+=($n)
-      fi
-    done
-    echo "Even numbers: ${evenNumbers[@]}"
+  id: "bash",
+  label: "bash",
+  logoPath: "/bash.png",
+  pistonRuntime: { language: "bash", version: "5.2.0" },
+  monacoLanguage: "bash",
+  defaultCode: `# Bash Playground
+numbers=(1 2 3 4 5)
+# Map numbers to their squares
+squares=()
+for n in "${numbers[@]}"
+do
+  squares+=($((n * n)))
+done
+echo "Original numbers: ${numbers[@]}"
+echo "Squared numbers: ${squares[@]}"
+# Filter even numbers
+evenNumbers=()
+for n in "${numbers[@]}"; do
+  if ((n % 2 == 0)); then
+    evenNumbers+=($n)
+  fi
+done
+echo "Even numbers: ${evenNumbers[@]}"
 
-   # Calculate sum
-   sum=0
-   for n in "${numbers[@]}"; do
-     sum=$((sum + n))
-   done
-   echo "Sum of numbers: $sum"`,
-  },
+# Calculate sum
+sum=0
+for n in "${numbers[@]}"; do
+  sum=$((sum + n))
+done
+echo "Sum of numbers: $sum"`,
+},
   javascript: {
     id: "javascript",
     label: "JavaScript",
