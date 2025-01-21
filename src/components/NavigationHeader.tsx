@@ -1,5 +1,4 @@
 import HeaderProfileBtn from "@/app/(root)/_components/HeaderProfileBtn";
-import { SignedOut } from "@clerk/nextjs";
 import { Blocks, Code2, Sparkles } from "lucide-react";
 import Link from "next/link";
 
@@ -8,7 +7,7 @@ function NavigationHeader() {
     <div className="sticky top-0 z-50 w-full border-b border-gray-800/50 bg-gray-950/80 backdrop-blur-xl backdrop-saturate-150">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5" />
       <div className="max-w-7xl mx-auto px-4">
-        <div className="relative h-16 flex items-center justify-between">
+        <div className="relative h-16 flex flex-wrap items-center justify-between">
           {/* Logo Section */}
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-3 group relative">
@@ -33,7 +32,7 @@ function NavigationHeader() {
             </Link>
           </div>
 
-          {/* Links */}
+          {/* Navigation Links */}
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/snippets"
@@ -66,16 +65,6 @@ function NavigationHeader() {
 
           {/* Profile Section */}
           <div className="flex items-center gap-4">
-            <SignedOut>
-              <Link
-                href="/sign-in"
-                className="flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 hover:bg-blue-500/10 
-                border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
-              >
-                <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-medium">Sign In</span>
-              </Link>
-            </SignedOut>
             <HeaderProfileBtn />
           </div>
         </div>
