@@ -14,6 +14,39 @@ type LanguageConfig = Record<
 >;
 
 export const LANGUAGE_CONFIG: LanguageConfig = {
+  bash: {
+    id: "bash",
+    label: "bash",
+    logoPath: "/bash.png",
+    pistonRuntime: { language: "bash", version: "5.2.0" },
+    monacoLanguage: "bash",
+    defaultCode: `#Bash Playground
+    numbers=(1 2 3 4 5)
+
+# Map numbers to their squares
+squares=()
+for n in "${numbers[@]}"; do
+  squares+=($((n * n)))
+done
+echo "Original numbers: ${numbers[@]}"
+echo "Squared numbers: ${squares[@]}"
+
+# Filter even numbers
+evenNumbers=()
+for n in "${numbers[@]}"; do
+  if ((n % 2 == 0)); then
+    evenNumbers+=($n)
+  fi
+done
+echo "Even numbers: ${evenNumbers[@]}"
+
+# Calculate sum
+sum=0
+for n in "${numbers[@]}"; do
+  sum=$((sum + n))
+done
+echo "Sum of numbers: $sum"`,
+  },
   javascript: {
     id: "javascript",
     label: "JavaScript",
@@ -177,6 +210,28 @@ func main() {
   }
   fmt.Println("Sum of numbers:", sum)
 }`,
+  },
+  powershell: {
+    id: "powershell",
+    label: "PowerShell",
+    logoPath: "/powershell.png",
+    pistonRuntime: { language: "powershell", version: "7.1.4" },
+    monacoLanguage: "powershell",
+    defaultCode: `#PowerShell Playground
+    $numbers = @(1, 2, 3, 4, 5)
+
+# Map numbers to their squares
+$squares = $numbers | ForEach-Object { $_ * $_ }
+Write-Output "Original numbers: $numbers"
+Write-Output "Squared numbers: $squares"
+
+# Filter even numbers
+$evenNumbers = $numbers | Where-Object { $_ % 2 -eq 0 }
+Write-Output "Even numbers: $evenNumbers"
+
+# Calculate sum
+$sum = $numbers | Measure-Object -Sum | Select-Object -ExpandProperty Sum
+Write-Output "Sum of numbers: $sum"`,
   },
   rust: {
     id: "rust",
