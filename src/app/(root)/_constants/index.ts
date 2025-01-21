@@ -25,8 +25,8 @@ export const LANGUAGE_CONFIG: LanguageConfig = {
 
 # Map numbers to their squares
 squares=()
-for n in "${numbers[@]}"; do
-  squares+=($((n * n)))
+for n in "${numbers[@]}";
+    do squares+=($((n * n)))
 done
 echo "Original numbers: ${numbers[@]}"
 echo "Squared numbers: ${squares[@]}"
@@ -68,6 +68,30 @@ console.log('Even numbers:', evenNumbers);
 // Calculate sum using reduce
 const sum = numbers.reduce((acc, curr) => acc + curr, 0);
 console.log('Sum of numbers:', sum);`,
+  },
+  kotlin: {
+    id: "kotlin",
+    label: "Kotlin",
+    logoPath: "kotlin.jpeg",
+    pistonRuntime: { language: "kotlin", version: "1.8.20" },
+    monacoLanguage: "kotlin",
+    defaultCode: `//Kotlin Playground
+    fun main() {
+    val numbers = listOf(1, 2, 3, 4, 5)
+
+    // Map numbers to their squares
+    val squares = numbers.map { it * it }
+    println("Original numbers: $numbers")
+    println("Squared numbers: $squares")
+
+    // Filter for even numbers
+    val evenNumbers = numbers.filter { it % 2 == 0 }
+    println("Even numbers: $evenNumbers")
+
+    // Calculate sum using reduce
+    val sum = numbers.reduce { acc, curr -> acc + curr }
+    println("Sum of numbers: $sum")
+}`,
   },
   typescript: {
     id: "typescript",
