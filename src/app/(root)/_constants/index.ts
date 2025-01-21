@@ -50,7 +50,7 @@ echo "Sum of numbers: \$sum"`,
     id: "haskell",
     label: "Haskell",
     logoPath: "/haskell.jpeg",
-    pistonRuntime: { language: "haskell", version: "" },
+    pistonRuntime: { language: "haskell", version: "9.0.1" },
     monakoLamguage: "haskell",
     defaultCode: `-- Haskell Playground
     main :: IO ()
