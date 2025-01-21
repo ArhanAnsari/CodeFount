@@ -46,6 +46,30 @@ for n in \${numbers[@]}; do
 done
 echo "Sum of numbers: \$sum"`,
 },
+  haskell: {
+    id: "haskell",
+    label: "Haskell",
+    logoPath: "/haskell.jpeg",
+    pistonRuntime: { language: "haskell", version: "" },
+    monakoLamguage: "haskell",
+    defaultCode: `-- Haskell Playground
+    main :: IO ()
+    main = do
+    let numbers = [1, 2, 3, 4, 5]
+
+    -- Map numbers to their squares
+    let squares = map (^2) numbers
+    putStrLn $ "Original numbers: " ++ show numbers
+    putStrLn $ "Squared numbers: " ++ show squares
+
+    -- Filter for even numbers
+    let evenNumbers = filter even numbers
+    putStrLn $ "Even numbers: " ++ show evenNumbers
+
+    -- Calculate sum using foldl
+    let sum = foldl (+) 0 numbers
+    putStrLn $ "Sum of numbers: " ++ show sum`,
+  },
   javascript: {
     id: "javascript",
     label: "JavaScript",
