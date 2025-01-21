@@ -22,30 +22,28 @@ export const LANGUAGE_CONFIG: LanguageConfig = {
     monacoLanguage: "bash",
     defaultCode: `#Bash Playground
     numbers=(1 2 3 4 5)
+    # Map numbers to their squares
+    squares=()
+    for n in "${numbers[@]}";
+                do squares+=($((n * n)))
+    done
+    echo "Original numbers: ${numbers[@]}"
+    echo "Squared numbers: ${squares[@]}"
+    # Filter even numbers
+    evenNumbers=()
+    for n in "${numbers[@]}"; do
+      if ((n % 2 == 0)); then
+        evenNumbers+=($n)
+      fi
+    done
+    echo "Even numbers: ${evenNumbers[@]}"
 
-# Map numbers to their squares
-squares=()
-for n in "${numbers[@]}";
-    do squares+=($((n * n)))
-done
-echo "Original numbers: ${numbers[@]}"
-echo "Squared numbers: ${squares[@]}"
-
-# Filter even numbers
-evenNumbers=()
-for n in "${numbers[@]}"; do
-  if ((n % 2 == 0)); then
-    evenNumbers+=($n)
-  fi
-done
-echo "Even numbers: ${evenNumbers[@]}"
-
-# Calculate sum
-sum=0
-for n in "${numbers[@]}"; do
-  sum=$((sum + n))
-done
-echo "Sum of numbers: $sum"`,
+   # Calculate sum
+   sum=0
+   for n in "${numbers[@]}"; do
+     sum=$((sum + n))
+   done
+   echo "Sum of numbers: $sum"`,
   },
   javascript: {
     id: "javascript",
