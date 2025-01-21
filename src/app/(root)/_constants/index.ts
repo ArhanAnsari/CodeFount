@@ -14,6 +14,62 @@ type LanguageConfig = Record<
 >;
 
 export const LANGUAGE_CONFIG: LanguageConfig = {
+  bash: {
+  id: "bash",
+  label: "bash",
+  logoPath: "/bash.png",
+  pistonRuntime: { language: "bash", version: "5.2.0" },
+  monacoLanguage: "bash",
+  defaultCode: `# Bash Playground
+numbers=(1 2 3 4 5)
+# Map numbers to their squares
+squares=()
+for n in \${numbers[@]}; do
+  squares+=(\$((n * n)))
+done
+echo "Original numbers: \${numbers[@]}"
+echo "Squared numbers: \${squares[@]}"
+
+# Filter even numbers
+evenNumbers=()
+for n in \${numbers[@]}; do
+  if ((n % 2 == 0)); then
+    evenNumbers+=(\$n)
+  fi
+done
+echo "Even numbers: \${evenNumbers[@]}"
+
+# Calculate sum
+sum=0
+for n in \${numbers[@]}; do
+  sum=\$((sum + n))
+done
+echo "Sum of numbers: \$sum"`,
+},
+  haskell: {
+    id: "haskell",
+    label: "Haskell",
+    logoPath: "/haskell.jpeg",
+    pistonRuntime: { language: "haskell", version: "9.0.1" },
+    monakoLamguage: "haskell",
+    defaultCode: `-- Haskell Playground
+    main :: IO ()
+    main = do
+    let numbers = [1, 2, 3, 4, 5]
+
+    -- Map numbers to their squares
+    let squares = map (^2) numbers
+    putStrLn $ "Original numbers: " ++ show numbers
+    putStrLn $ "Squared numbers: " ++ show squares
+
+    -- Filter for even numbers
+    let evenNumbers = filter even numbers
+    putStrLn $ "Even numbers: " ++ show evenNumbers
+
+    -- Calculate sum using foldl
+    let sum = foldl (+) 0 numbers
+    putStrLn $ "Sum of numbers: " ++ show sum`,
+  },
   javascript: {
     id: "javascript",
     label: "JavaScript",
@@ -35,6 +91,30 @@ console.log('Even numbers:', evenNumbers);
 // Calculate sum using reduce
 const sum = numbers.reduce((acc, curr) => acc + curr, 0);
 console.log('Sum of numbers:', sum);`,
+  },
+  kotlin: {
+    id: "kotlin",
+    label: "Kotlin",
+    logoPath: "kotlin.jpeg",
+    pistonRuntime: { language: "kotlin", version: "1.8.20" },
+    monacoLanguage: "kotlin",
+    defaultCode: `//Kotlin Playground
+    fun main() {
+    val numbers = listOf(1, 2, 3, 4, 5)
+
+    // Map numbers to their squares
+    val squares = numbers.map { it * it }
+    println("Original numbers: $numbers")
+    println("Squared numbers: $squares")
+
+    // Filter for even numbers
+    val evenNumbers = numbers.filter { it % 2 == 0 }
+    println("Even numbers: $evenNumbers")
+
+    // Calculate sum using reduce
+    val sum = numbers.reduce { acc, curr -> acc + curr }
+    println("Sum of numbers: $sum")
+}`,
   },
   typescript: {
     id: "typescript",
@@ -177,6 +257,28 @@ func main() {
   }
   fmt.Println("Sum of numbers:", sum)
 }`,
+  },
+  powershell: {
+    id: "powershell",
+    label: "PowerShell",
+    logoPath: "/powershell.png",
+    pistonRuntime: { language: "powershell", version: "7.1.4" },
+    monacoLanguage: "powershell",
+    defaultCode: `#PowerShell Playground
+    $numbers = @(1, 2, 3, 4, 5)
+
+# Map numbers to their squares
+$squares = $numbers | ForEach-Object { $_ * $_ }
+Write-Output "Original numbers: $numbers"
+Write-Output "Squared numbers: $squares"
+
+# Filter even numbers
+$evenNumbers = $numbers | Where-Object { $_ % 2 -eq 0 }
+Write-Output "Even numbers: $evenNumbers"
+
+# Calculate sum
+$sum = $numbers | Measure-Object -Sum | Select-Object -ExpandProperty Sum
+Write-Output "Sum of numbers: $sum"`,
   },
   rust: {
     id: "rust",
