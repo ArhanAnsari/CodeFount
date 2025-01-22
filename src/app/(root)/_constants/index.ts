@@ -47,6 +47,30 @@ for n in \${numbers[@]}; do
 done
 echo "Sum of numbers: \$sum"`,
 },
+ dart: {
+  id: "dart",
+  label: "Dart",
+  logoPath: "/dart.png",
+  pistonRuntime: { language: "dart", version: "2.19.6" },
+  monacoLanguage: "dart",
+  defaultCode: `// Dart Playground
+  void main() {
+  var numbers = [1, 2, 3, 4, 5];
+
+  // Map numbers to their squares
+  var squares = numbers.map((n) => n * n).toList();
+  print("Original numbers: $numbers");
+  print("Squared numbers: $squares");
+
+  // Filter for even numbers
+  var evenNumbers = numbers.where((n) => n % 2 == 0).toList();
+  print("Even numbers: $evenNumbers");
+
+  // Calculate sum using reduce
+  var sum = numbers.reduce((acc, curr) => acc + curr);
+  print("Sum of numbers: $sum");
+}`,
+ },
   haskell: {
     id: "haskell",
     label: "Haskell",
@@ -96,7 +120,7 @@ console.log('Sum of numbers:', sum);`,
   kotlin: {
     id: "kotlin",
     label: "Kotlin",
-    logoPath: "kotlin.png",
+    logoPath: "/kotlin.png",
     pistonRuntime: { language: "kotlin", version: "1.8.20" },
     monacoLanguage: "kotlin",
     defaultCode: `//Kotlin Playground
@@ -218,6 +242,28 @@ print(f"Sum of numbers: {numbers_sum}")`,
   }
 }`,
   },
+  julia: {
+    id: "julia",
+    label: "Julia",
+    logoPath: "/julia.png",
+    pistonRuntime: { language: "julia", version: "1.8.5" },
+    monacoLanguage: "julia",
+    defaultCode: `# Julia Playground
+    numbers = [1, 2, 3, 4, 5]
+
+# Map numbers to their squares
+squares = map(x -> x^2, numbers)
+println("Original numbers: ", numbers)
+println("Squared numbers: ", squares)
+
+# Filter for even numbers
+even_numbers = filter(x -> x % 2 == 0, numbers)
+println("Even numbers: ", even_numbers)
+
+# Calculate sum
+sum_numbers = sum(numbers)
+println("Sum of numbers: ", sum_numbers)`,
+  },
   go: {
     id: "go",
     label: "Go",
@@ -281,6 +327,31 @@ Write-Output "Even numbers: $evenNumbers"
 $sum = $numbers | Measure-Object -Sum | Select-Object -ExpandProperty Sum
 Write-Output "Sum of numbers: $sum"`,
   },
+  racket: {
+    id: "racket",
+    label: "Racket",
+    logoPath: "/racket.png",
+    pistonRuntime: { language: "racket", version: "8.3.0" },
+    monacoLanguage: "racket",
+    defaultCode: `; Racket Playground
+    #lang racket
+
+(define numbers '(1 2 3 4 5))
+
+; Map numbers to their squares
+(define squares (map (λ (n) (* n n)) numbers))
+(displayln (string-append "Original numbers: " (format "~a" numbers)))
+(displayln (string-append "Squared numbers: " (format "~a" squares)))
+
+; Filter for even numbers
+(define even-numbers (filter even? numbers))
+(displayln (string-append "Even numbers: " (format "~a" even-numbers)))
+
+; Calculate sum
+(define sum (foldl + 0 numbers))
+(displayln (string-append "Sum of numbers: " (format "~a" sum)))
+`,
+  },
   rust: {
     id: "rust",
     label: "Rust",
@@ -336,6 +407,28 @@ cat("Even numbers:", evenNumbers, "\n")
 sum <- sum(numbers)
 cat("Sum of numbers:", sum, "\n")
 `,
+  },
+  crystal: {
+    id: "crystal",
+    label: "Crystal",
+    logoPath: "/crystal.png",
+    pistonRuntime: { language: "crystal", version: "0.36.1" },
+    monacoLanguage: "crystal",
+    defaultCode: `# Crystal Playground
+    numbers = [1, 2, 3, 4, 5]
+
+# Map numbers to their squares
+squares = numbers.map { |n| n * n }
+puts "Original numbers: #{numbers}"
+puts "Squared numbers: #{squares}"
+
+# Filter for even numbers
+even_numbers = numbers.select { |n| n.even? }
+puts "Even numbers: #{even_numbers}"
+
+# Calculate sum
+sum = numbers.reduce(0) { |acc, curr| acc + curr }
+puts "Sum of numbers: #{sum}"`,
   },
   c: {
     id: "c",
@@ -618,6 +711,34 @@ print("Even numbers: \\(evenNumbers)")
 // Calculate sum
 let sum = numbers.reduce(0, +)
 print("Sum of numbers: \\(sum)")`,
+  },
+  zig: {
+    id: "zig",
+    label: "Zig",
+    logoPath: "/zig.png",
+    pistonRuntime: { language: "zig", version: "0.10.1" },
+    monacoLanguage: "zig",
+    defaultCode: `//Zig Playground
+    const std = @import("std");
+
+pub fn main() !void {
+    const numbers = [_]i32{1, 2, 3, 4, 5};
+
+    // Map numbers to their squares
+    var squares: [5]i32 = undefined;
+    for (numbers) |n, i| squares[i] = n * n;
+    std.debug.print("Original numbers: {}\n", .{numbers});
+    std.debug.print("Squared numbers: {}\n", .{squares});
+
+    // Filter even numbers
+    var evenNumbers: []i32 = &[_]i32{2, 4}; // Zig does not dynamically allocate arrays easily
+    std.debug.print("Even numbers: {}\n", .{evenNumbers});
+
+    // Calculate sum
+    var sum: i32 = 0;
+    for (numbers) |n| sum += n;
+    std.debug.print("Sum of numbers: {}\n", .{sum});
+}`,
   },
 };
 
