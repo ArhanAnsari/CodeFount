@@ -1,4 +1,5 @@
 import { Monaco } from "@monaco-editor/react";
+import { editor } from "monaco-editor";
 import { Theme } from "../../../types";
 
 type LanguageConfig = Record<
@@ -49,9 +50,9 @@ echo "Sum of numbers: \$sum"`,
   haskell: {
     id: "haskell",
     label: "Haskell",
-    logoPath: "/haskell.jpeg",
+    logoPath: "/haskell.png",
     pistonRuntime: { language: "haskell", version: "9.0.1" },
-    monakoLamguage: "haskell",
+    monacoLanguage: "haskell",
     defaultCode: `-- Haskell Playground
     main :: IO ()
     main = do
@@ -95,7 +96,7 @@ console.log('Sum of numbers:', sum);`,
   kotlin: {
     id: "kotlin",
     label: "Kotlin",
-    logoPath: "kotlin.jpeg",
+    logoPath: "kotlin.png",
     pistonRuntime: { language: "kotlin", version: "1.8.20" },
     monacoLanguage: "kotlin",
     defaultCode: `//Kotlin Playground
@@ -628,7 +629,7 @@ export const THEMES: Theme[] = [
   { id: "solarized-dark", label: "Solarized Dark", color: "#002b36" },
 ];
 
-export const THEME_DEFINITONS = {
+export const THEME_DEFINITONS: Record<string, editor.IStandaloneThemeData> = {
   "github-dark": {
     base: "vs-dark",
     inherit: true,
