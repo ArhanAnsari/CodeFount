@@ -1,5 +1,4 @@
 // src/app/terms/page.tsx
-
 import React from "react";
 import NavigationHeader from "@/components/NavigationHeader";
 
@@ -19,7 +18,7 @@ const TermsPage: React.FC = () => {
   return (
     <>
       <NavigationHeader />
-      <main className="p-8 font-sans">
+      <main className="pt-16 p-8 font-sans">
         <article className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-semibold mb-4">Terms and Conditions</h1>
           <p className="mb-4 text-gray-700">
