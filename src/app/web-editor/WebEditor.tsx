@@ -89,34 +89,38 @@ export default function WebEditor() {
 
   return (
     <div className="flex flex-col h-screen">
+      {/* Navigation Header */}
       <NavigationHeader />
-      <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="flex flex-1 flex-col lg:flex-row">
-        {/* Editor Panel */}
-        <div className="flex-1 p-4 overflow-hidden lg:overflow-auto">
-          <EditorPanel
-            activeTab={activeTab}
-            html={html}
-            setHtml={setHtml}
-            css={css}
-            setCss={setCss}
-            js={js}
-            setJs={setJs}
-          />
+      <div className="mt-4 flex flex-col h-full px-4 md:px-6"> {/* Responsive padding */}
+        {/* Tab Bar */}
+        <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <div className="flex-1 flex flex-col lg:flex-row my-4 space-y-4 lg:space-y-0 lg:space-x-4"> {/* Adjusted spacing */}
+          {/* Editor Panel */}
+          <div className="flex-1 p-4 bg-white rounded-md shadow-md overflow-hidden lg:overflow-auto">
+            <EditorPanel
+              activeTab={activeTab}
+              html={html}
+              setHtml={setHtml}
+              css={css}
+              setCss={setCss}
+              js={js}
+              setJs={setJs}
+            />
+          </div>
+
+          {/* Preview Panel */}
+          <div className="flex-1 p-4 bg-gray-200 rounded-md shadow-md overflow-hidden lg:overflow-auto">
+            <PreviewPanel preview={preview} />
+          </div>
         </div>
 
-        {/* Preview Panel */}
-        <div className="flex-1 p-4 overflow-hidden bg-gray-200 lg:overflow-auto">
-          <PreviewPanel preview={preview} />
+        {/* Console */}
+        <div className="console bg-black text-white p-4 overflow-y-auto h-32 mt-4 rounded-md shadow-md">
+          <h3 className="text-lg font-bold">Console</h3>
+          {consoleLogs.map((log, index) => (
+            <div key={index}>{log}</div>
+          ))}
         </div>
-      </div>
-
-      {/* Console */}
-      <div className="console bg-black text-white p-4 overflow-y-auto h-32">
-        <h3 className="text-lg font-bold">Console</h3>
-        {consoleLogs.map((log, index) => (
-          <div key={index}>{log}</div>
-        ))}
       </div>
     </div>
   );
