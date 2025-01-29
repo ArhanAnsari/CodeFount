@@ -10,6 +10,8 @@ import EditorPanel from "./EditorPanel";
 import PreviewPanel from "./PreviewPanel";
 import TabBar from "./TabBar";
 
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+
 export default function WebEditor() {
   const [html, setHtml] = useState("<p>Hello from CodeFount!</p>");
   const [css, setCss] = useState(`
@@ -31,6 +33,7 @@ export default function WebEditor() {
   const [activeTab, setActiveTab] = useState("HTML");
   const [preview, setPreview] = useState("");
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
+  const [aiSuggestion, setAiSuggestion] = useState("");
 
   const { user, isLoaded, isSignedIn } = useUser();
   const [userId, setUserId] = useState("");
@@ -38,8 +41,6 @@ export default function WebEditor() {
   useEffect(() => {
     if (isLoaded && isSignedIn && user?.id) {
       setUserId(user.id);
-
-      const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
       convex
         .query(api.webEditor.fetchContent, { userId: user.id })
         .then((data) => {
@@ -52,6 +53,14 @@ export default function WebEditor() {
         .catch(console.error);
     }
   }, [isLoaded, isSignedIn, user]);
+
+  // AI Suggestion Function
+  const handleAISuggest = async () => {
+    const code = activeTab === "HTML" ? html : activeTab === "CSS" ? css : js;
+    const prompt = `Improve the following ${activeTab} code:\n\n${code}`;
+    const suggestion = await convex.mutation(api.gemini.suggestCode, { prompt });
+    setAiSuggestion(suggestion);
+  };
 
   useEffect(() => {
     const combinedPreview = `
@@ -75,28 +84,7 @@ export default function WebEditor() {
       </html>
     `;
     setPreview(combinedPreview);
-
-    const timeout = setTimeout(() => {
-      if (userId) {
-        const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-        convex
-          .mutation(api.webEditor.saveContent, { userId, html, css, js })
-          .catch(console.error);
-      }
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [html, css, js, userId]);
-
-  useEffect(() => {
-    const handleConsoleLog = (event: MessageEvent) => {
-      if (event.data.type === "consoleLog") {
-        setConsoleLogs((prevLogs) => [...prevLogs, ...event.data.args]);
-      }
-    };
-    window.addEventListener("message", handleConsoleLog);
-    return () => window.removeEventListener("message", handleConsoleLog);
-  }, []);
+  }, [html, css, js]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -115,6 +103,19 @@ export default function WebEditor() {
           <div className="flex-1 p-4 bg-gray-200 rounded-md shadow-md overflow-hidden lg:overflow-auto">
             <PreviewPanel preview={preview} />
           </div>
+        </div>
+
+        {/* AI Suggestion Section */}
+        <div className="mt-4 p-4 bg-white rounded-md shadow-md">
+          <button onClick={handleAISuggest} className="bg-blue-500 text-white px-4 py-2 rounded">
+            AI Suggest ({activeTab})
+          </button>
+          {aiSuggestion && (
+            <div className="mt-4 p-2 border rounded bg-gray-100">
+              <h3 className="font-bold">AI Suggestion:</h3>
+              <pre>{aiSuggestion}</pre>
+            </div>
+          )}
         </div>
 
         {/* Console */}
