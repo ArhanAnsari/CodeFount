@@ -34,6 +34,7 @@ export default function WebEditor() {
   const [preview, setPreview] = useState("");
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
   const [aiSuggestion, setAiSuggestion] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { user, isLoaded, isSignedIn } = useUser();
   const [userId, setUserId] = useState("");
@@ -58,8 +59,15 @@ export default function WebEditor() {
   const handleAISuggest = async () => {
     const code = activeTab === "HTML" ? html : activeTab === "CSS" ? css : js;
     const prompt = `Improve the following ${activeTab} code:\n\n${code}`;
-    const suggestion = await convex.mutation(api.gemini.suggestCode, { prompt });
-    setAiSuggestion(suggestion);
+    setLoading(true);
+    try {
+      const suggestion = await convex.mutation(api.gemini.suggestCode, { prompt });
+      setAiSuggestion(suggestion);
+    } catch (error) {
+      setAiSuggestion("Failed to get AI suggestion.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -87,33 +95,38 @@ export default function WebEditor() {
   }, [html, css, js]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-gray-100">
       {/* Navigation Header */}
       <NavigationHeader />
-      <div className="mt-4 flex flex-col h-full px-4 md:px-6">
+      <div className="flex flex-col h-full p-4">
         {/* Tab Bar */}
         <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <div className="flex-1 flex flex-col lg:flex-row my-4 space-y-4 lg:space-y-0 lg:space-x-4">
+
+        <div className="flex flex-col lg:flex-row flex-1 mt-4 space-y-4 lg:space-y-0 lg:space-x-4">
           {/* Editor Panel */}
-          <div className="flex-1 p-4 bg-white rounded-md shadow-md overflow-hidden lg:overflow-auto">
+          <div className="flex-1 p-4 bg-white rounded-md shadow-md">
             <EditorPanel activeTab={activeTab} html={html} setHtml={setHtml} css={css} setCss={setCss} js={js} setJs={setJs} />
           </div>
 
           {/* Preview Panel */}
-          <div className="flex-1 p-4 bg-gray-200 rounded-md shadow-md overflow-hidden lg:overflow-auto">
+          <div className="flex-1 p-4 bg-gray-200 rounded-md shadow-md">
             <PreviewPanel preview={preview} />
           </div>
         </div>
 
         {/* AI Suggestion Section */}
         <div className="mt-4 p-4 bg-white rounded-md shadow-md">
-          <button onClick={handleAISuggest} className="bg-blue-500 text-white px-4 py-2 rounded">
-            AI Suggest ({activeTab})
+          <button
+            onClick={handleAISuggest}
+            disabled={loading}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-2 rounded transition"
+          >
+            {loading ? "Getting AI Suggestion..." : `AI Suggest (${activeTab})`}
           </button>
           {aiSuggestion && (
             <div className="mt-4 p-2 border rounded bg-gray-100">
               <h3 className="font-bold">AI Suggestion:</h3>
-              <pre>{aiSuggestion}</pre>
+              <pre className="whitespace-pre-wrap">{aiSuggestion}</pre>
             </div>
           )}
         </div>
