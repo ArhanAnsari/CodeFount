@@ -1,15 +1,16 @@
-import { mutation } from './_generated/server';
+import { mutation } from "./_generated/server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY; // Store in .env
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-// AI Code Suggestion API
 export const suggestCode = mutation(async ({}, { prompt }: { prompt: string }) => {
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
-  });
-
-  const data = await response.json();
-  return data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No suggestion available';
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    return response.text();
+  } catch (error) {
+    console.error("Gemini API Error:", error);
+    return "AI suggestion failed. Please try again.";
+  }
 });
