@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { ConvexHttpClient } from 'convex/browser';
-import { useUser } from '@clerk/nextjs'; // Use the useUser hook from Clerk
-import { api } from '../../../convex/_generated/api';
-import NavigationHeader from '@/components/NavigationHeader';
+import { useState, useEffect } from "react";
+import { ConvexHttpClient } from "convex/browser";
+import { useUser } from "@clerk/nextjs";
+import { api } from "../../../convex/_generated/api";
+import NavigationHeader from "@/components/NavigationHeader";
 
-import EditorPanel from './EditorPanel';
-import PreviewPanel from './PreviewPanel';
-import TabBar from './TabBar';
+import EditorPanel from "./EditorPanel";
+import PreviewPanel from "./PreviewPanel";
+import TabBar from "./TabBar";
 
 export default function WebEditor() {
-  const [html, setHtml] = useState('<p>Hello from CodeFount!</p>');
+  const [html, setHtml] = useState("<p>Hello from CodeFount!</p>");
   const [css, setCss] = useState(`
     body {
       font-family: Arial, sans-serif;
@@ -26,21 +26,30 @@ export default function WebEditor() {
       color: #2c3e50;
       font-size: 2.5rem;
     }
-    `);
+  `);
   const [js, setJs] = useState('console.log("Hello from CodeFount!");');
-  const [activeTab, setActiveTab] = useState('HTML');
-  const [preview, setPreview] = useState('');
+  const [activeTab, setActiveTab] = useState("HTML");
+  const [preview, setPreview] = useState("");
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
 
   const { user, isLoaded, isSignedIn } = useUser();
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     if (isLoaded && isSignedIn && user?.id) {
       setUserId(user.id);
 
       const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-      convex.query(api.users.getUser, { userId: user.id }).catch(console.error);
+      convex
+        .query(api.webEditor.fetchContent, { userId: user.id })
+        .then((data) => {
+          if (data) {
+            setHtml(data.html);
+            setCss(data.css);
+            setJs(data.js);
+          }
+        })
+        .catch(console.error);
     }
   }, [isLoaded, isSignedIn, user]);
 
@@ -70,7 +79,9 @@ export default function WebEditor() {
     const timeout = setTimeout(() => {
       if (userId) {
         const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-        convex.mutation(api.webEditor.saveContent, { userId, html, css, js }).catch(console.error);
+        convex
+          .mutation(api.webEditor.saveContent, { userId, html, css, js })
+          .catch(console.error);
       }
     }, 500);
 
@@ -79,33 +90,25 @@ export default function WebEditor() {
 
   useEffect(() => {
     const handleConsoleLog = (event: MessageEvent) => {
-      if (event.data.type === 'consoleLog') {
+      if (event.data.type === "consoleLog") {
         setConsoleLogs((prevLogs) => [...prevLogs, ...event.data.args]);
       }
     };
-    window.addEventListener('message', handleConsoleLog);
-    return () => window.removeEventListener('message', handleConsoleLog);
+    window.addEventListener("message", handleConsoleLog);
+    return () => window.removeEventListener("message", handleConsoleLog);
   }, []);
 
   return (
     <div className="flex flex-col h-screen">
       {/* Navigation Header */}
       <NavigationHeader />
-      <div className="mt-4 flex flex-col h-full px-4 md:px-6"> {/* Responsive padding */}
+      <div className="mt-4 flex flex-col h-full px-4 md:px-6">
         {/* Tab Bar */}
         <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <div className="flex-1 flex flex-col lg:flex-row my-4 space-y-4 lg:space-y-0 lg:space-x-4"> {/* Adjusted spacing */}
+        <div className="flex-1 flex flex-col lg:flex-row my-4 space-y-4 lg:space-y-0 lg:space-x-4">
           {/* Editor Panel */}
           <div className="flex-1 p-4 bg-white rounded-md shadow-md overflow-hidden lg:overflow-auto">
-            <EditorPanel
-              activeTab={activeTab}
-              html={html}
-              setHtml={setHtml}
-              css={css}
-              setCss={setCss}
-              js={js}
-              setJs={setJs}
-            />
+            <EditorPanel activeTab={activeTab} html={html} setHtml={setHtml} css={css} setCss={setCss} js={js} setJs={setJs} />
           </div>
 
           {/* Preview Panel */}
