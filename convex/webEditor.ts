@@ -28,9 +28,11 @@ const validateAndSanitize = (html: string, css: string, js: string) => {
 
 // Save all changes as new documents (keeps history)
 export const saveContent = mutation(
-  async ({ db }, { userId, html, css, js }: { userId: string; html: string; css: string; js: string }) => {
+  async (
+    { db },
+    { userId, html, css, js, updatedAt }: { userId: string; html: string; css: string; js: string; updatedAt: number }
+  ) => {
     const { sanitizedHtml, sanitizedCss, sanitizedJs } = validateAndSanitize(html, css, js);
-    const updatedAt = Date.now();
 
     // Always insert a new document
     await db.insert("webEditorContent", { userId, html: sanitizedHtml, css: sanitizedCss, js: sanitizedJs, updatedAt });
@@ -38,3 +40,4 @@ export const saveContent = mutation(
     return { success: true, updatedAt };
   }
 );
+

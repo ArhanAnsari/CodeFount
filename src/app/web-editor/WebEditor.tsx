@@ -26,8 +26,11 @@ export default function WebEditor() {
     }
   }, [isLoaded, isSignedIn, user]);
 
-  const updateCode = useMutation(api.webEditorContent.updateCode);
-  const codeData = useQuery(api.webEditorContent.getCode, { userId });
+  const updateCode = useMutation(api.webEditor.saveContent);
+  const codeData = useQuery(api.webEditor.fetchContent, { userId });
+  // const { data: codeData } = useQuery(api.webEditor.fetchContent, { userId });
+  // const saveCode = useMutation(api.webEditor.saveContent);
+
 
   const [html, setHtml] = useState(codeData?.html || "<p>Hello from CodeFount!</p>");
   const [css, setCss] = useState(codeData?.css || `
