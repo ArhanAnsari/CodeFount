@@ -94,6 +94,8 @@ To run this project, ensure you have the following installed:
 
    CLERK_WEBHOOK_SECRET=
    LEMON_SQUEEZY_WEBHOOK_SECRET=
+
+   GEMINI_API_KEY=
    ```
 
 2. Configure additional secrets in the Convex Dashboard:
