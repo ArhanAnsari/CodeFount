@@ -54,6 +54,7 @@ export default function WebEditor() {
     }
   }, [html, css, js, userId, updateCode]);
 
+  // AI Suggestion Function
   const handleAISuggest = async () => {
     const code = activeTab === "HTML" ? html : activeTab === "CSS" ? css : js;
     const prompt = `Improve the following ${activeTab} code:\n\n${code}`;
@@ -61,7 +62,9 @@ export default function WebEditor() {
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ prompt }),
       });
       const data = await response.json();
@@ -77,8 +80,22 @@ export default function WebEditor() {
   useEffect(() => {
     const combinedPreview = `
       <html>
-        <head><style>${css}</style></head>
-        <body>${html}<script>${js}</script></body>
+        <head>
+          <style>${css}</style>
+        </head>
+        <body>
+          ${html}
+          <script>
+            (function() {
+              const originalConsoleLog = console.log;
+              console.log = function(...args) {
+                window.parent.postMessage({ type: 'consoleLog', args }, '*');
+                originalConsoleLog.apply(console, args);
+              };
+              ${js}
+            })();
+          </script>
+        </body>
       </html>
     `;
     setPreview(combinedPreview);
@@ -97,17 +114,23 @@ export default function WebEditor() {
   return (
     <div className="flex flex-col h-screen bg-[#12121a] text-white">
       
+      {/* Navigation Header */}
       <NavigationHeader />
       <div className="mt-4 flex flex-col h-full p-4 space-y-4">
+        {/* Tab Bar */}
         <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        {/* Editor Panel */}
         <div className="flex flex-col lg:flex-row flex-1 space-y-4 lg:space-y-0 lg:space-x-4">
           <div className="flex-1 p-4 bg-[#1e1e2e] rounded-md shadow-md">
             <EditorPanel activeTab={activeTab} html={html} setHtml={setHtml} css={css} setCss={setCss} js={js} setJs={setJs} />
           </div>
+          {/* Preview Panel */}
           <div className="flex-1 p-4 bg-[#1e1e2e] rounded-md shadow-md">
             <PreviewPanel preview={preview} />
           </div>
         </div>
+
+        {/* AI Suggestion Section */}
         <div className="mt-4 p-4 bg-[#1e1e2e] rounded-md shadow-md">
           <button
             onClick={handleAISuggest}
@@ -123,6 +146,8 @@ export default function WebEditor() {
             </div>
           )}
         </div>
+
+        {/* Console */}
         <div className="console bg-black text-white p-4 overflow-y-auto h-32 mt-4 rounded-md shadow-md">
           <h3 className="text-lg font-bold">Console</h3>
           {consoleLogs.length > 0 ? consoleLogs.map((log, index) => (
