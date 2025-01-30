@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 import NavigationHeader from "@/components/NavigationHeader";
 
 import EditorPanel from "./EditorPanel";
@@ -9,23 +11,6 @@ import PreviewPanel from "./PreviewPanel";
 import TabBar from "./TabBar";
 
 export default function WebEditor() {
-  const [html, setHtml] = useState("<p>Hello from CodeFount!</p>");
-  const [css, setCss] = useState(`
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #12121a;
-      color: #ffffff;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      color: #f5f5f5;
-      font-size: 2.5rem;
-    }
-  `);
-  const [js, setJs] = useState('console.log("Hello from CodeFount!");');
   const [activeTab, setActiveTab] = useState("HTML");
   const [preview, setPreview] = useState("");
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
@@ -40,6 +25,33 @@ export default function WebEditor() {
       setUserId(user.id);
     }
   }, [isLoaded, isSignedIn, user]);
+
+  const updateCode = useMutation(api.webEditorContent.updateCode);
+  const codeData = useQuery(api.webEditorContent.getCode, { userId });
+
+  const [html, setHtml] = useState(codeData?.html || "<p>Hello from CodeFount!</p>");
+  const [css, setCss] = useState(codeData?.css || `
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #12121a;
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #f5f5f5;
+      font-size: 2.5rem;
+    }
+  `);
+  const [js, setJs] = useState(codeData?.js || 'console.log("Hello from CodeFount!");');
+
+  useEffect(() => {
+    if (userId) {
+      updateCode({ userId, html, css, js, updatedAt: Date.now() });
+    }
+  }, [html, css, js, userId, updateCode]);
 
   // AI Suggestion Function
   const handleAISuggest = async () => {
