@@ -1,4 +1,7 @@
+// src/app/(root)/_components/EditorPanel.tsx
+
 "use client";
+
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { useEffect, useState } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
@@ -10,12 +13,11 @@ import { useClerk } from "@clerk/nextjs";
 import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 import useMounted from "@/hooks/useMounted";
 import ShareSnippetDialog from "./ShareSnippetDialog";
+import { getAISuggestions } from "@/utils/ai";
 
 function EditorPanel() {
   const clerk = useClerk();
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
-  const [aiSuggestion, setAiSuggestion] = useState("");
-  const [loading, setLoading] = useState(false);
   const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
 
   const mounted = useMounted();
@@ -47,24 +49,11 @@ function EditorPanel() {
     localStorage.setItem("editor-font-size", size.toString());
   };
 
-  const handleAISuggest = async () => {
-    if (!editor) return;
-    const code = editor.getValue();
-    const prompt = `Improve the following ${language} code:\n\n${code}`;
-    setLoading(true);
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-      const data = await response.json();
-      setAiSuggestion(data.generatedContent || "No suggestion available.");
-    } catch (error) {
-      console.error("AI Suggestion Error:", error);
-      setAiSuggestion("AI suggestion failed. Please try again.");
-    } finally {
-      setLoading(false);
+  const handleAISuggestions = async () => {
+    if (editor) {
+      const currentCode = editor.getValue();
+      const aiSuggestions = await getAISuggestions(currentCode, language);
+      editor.setValue(aiSuggestions);
     }
   };
 
@@ -97,7 +86,9 @@ function EditorPanel() {
                   onChange={(e) => handleFontSizeChange(parseInt(e.target.value))}
                   className="w-20 h-1 bg-gray-600 rounded-lg cursor-pointer"
                 />
-                <span className="text-sm font-medium text-gray-400 min-w-[2rem] text-center">{fontSize}</span>
+                <span className="text-sm font-medium text-gray-400 min-w-[2rem] text-center">
+                  {fontSize}
+                </span>
               </div>
             </div>
 
@@ -115,12 +106,24 @@ function EditorPanel() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleAISuggest}
-              disabled={loading}
-              className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-purple-600 opacity-90 hover:opacity-100 transition-opacity"
+              onClick={handleAISuggestions}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
+               from-green-500 to-green-600 opacity-90 hover:opacity-100 transition-opacity"
             >
               <SparklesIcon className="size-4 text-white" />
-              <span className="text-sm font-medium text-white">{loading ? "Generating..." : "AI Suggest"}</span>
+              <span className="text-sm font-medium text-white">AI Suggest</span>
+            </motion.button>
+
+            {/* Share Button */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setIsShareDialogOpen(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
+               from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity"
+            >
+              <ShareIcon className="size-4 text-white" />
+              <span className="text-sm font-medium text-white ">Share</span>
             </motion.button>
           </div>
         </div>
@@ -135,20 +138,34 @@ function EditorPanel() {
               theme={theme}
               beforeMount={defineMonacoThemes}
               onMount={(editor) => setEditor(editor)}
-              options={{ fontSize, automaticLayout: true }}
+              options={{
+                minimap: { enabled: false },
+                fontSize,
+                automaticLayout: true,
+                scrollBeyondLastLine: false,
+                padding: { top: 16, bottom: 16 },
+                renderWhitespace: "selection",
+                fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
+                fontLigatures: true,
+                cursorBlinking: "smooth",
+                smoothScrolling: true,
+                contextmenu: true,
+                renderLineHighlight: "all",
+                lineHeight: 1.6,
+                letterSpacing: 0.5,
+                roundedSelection: true,
+                scrollbar: {
+                  verticalScrollbarSize: 8,
+                  horizontalScrollbarSize: 8,
+                },
+              }}
             />
           )}
+
           {!clerk.loaded && <EditorPanelSkeleton />}
         </div>
-
-        {/* AI Suggestion Output */}
-        {aiSuggestion && (
-          <div className="mt-4 p-4 bg-[#1e1e2e] rounded-md text-gray-200">
-            <h3 className="font-bold">AI Suggestion:</h3>
-            <pre className="whitespace-pre-wrap">{aiSuggestion}</pre>
-          </div>
-        )}
       </div>
+      {isShareDialogOpen && <ShareSnippetDialog onClose={() => setIsShareDialogOpen(false)} />}
     </div>
   );
 }
