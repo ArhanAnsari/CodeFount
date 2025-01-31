@@ -1,24 +1,21 @@
-// src/app/(root)/_components/EditorPanel.tsx
-
 "use client";
-
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { useEffect, useState } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { RotateCcwIcon, ShareIcon, TypeIcon, SparklesIcon } from "lucide-react";
+import { RotateCcwIcon, ShareIcon, TypeIcon, Wand2Icon } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
 import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 import useMounted from "@/hooks/useMounted";
 import ShareSnippetDialog from "./ShareSnippetDialog";
-import { getAISuggestions } from "@/utils/ai";
 
 function EditorPanel() {
   const clerk = useClerk();
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
+  const [loadingAI, setLoadingAI] = useState(false);
 
   const mounted = useMounted();
 
@@ -50,10 +47,30 @@ function EditorPanel() {
   };
 
   const handleAISuggestions = async () => {
-    if (editor) {
-      const currentCode = editor.getValue();
-      const aiSuggestions = await getAISuggestions(currentCode, language);
-      editor.setValue(aiSuggestions);
+    if (!editor) return;
+
+    setLoadingAI(true);
+    const userCode = editor.getValue();
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code: userCode, language }),
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch AI suggestions");
+
+      const data = await response.json();
+      const aiSuggestion = data.suggestion || "// No AI suggestion available";
+
+      editor.setValue(aiSuggestion);
+    } catch (error) {
+      console.error("AI Suggestion Error:", error);
+    } finally {
+      setLoadingAI(false);
     }
   };
 
@@ -107,11 +124,14 @@ function EditorPanel() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleAISuggestions}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
-               from-green-500 to-green-600 opacity-90 hover:opacity-100 transition-opacity"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r 
+               from-purple-500 to-purple-600 opacity-90 hover:opacity-100 transition-opacity"
+              disabled={loadingAI}
             >
-              <SparklesIcon className="size-4 text-white" />
-              <span className="text-sm font-medium text-white">AI Suggest</span>
+              <Wand2Icon className="size-4 text-white" />
+              <span className="text-sm font-medium text-white">
+                {loadingAI ? "Generating..." : "AI Suggest"}
+              </span>
             </motion.button>
 
             {/* Share Button */}
