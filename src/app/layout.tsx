@@ -70,8 +70,8 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "YOUR_GOOGLE_VERIFICATION_CODE",
-    bing: "YOUR_BING_VERIFICATION_CODE",
-    yandex: "YOUR_YANDEX_VERIFICATION_CODE",
+    bing: "CAB236663CA687B7AE6F7F906D3DD14E",
+    yandex: "91781b197f69fc93",
   },
   icons: {
     shortcut: "/favicon.ico", // Keeps the default Next.js favicon
