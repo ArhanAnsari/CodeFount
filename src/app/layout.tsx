@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     description:
       "Run, share, and collaborate on code snippets in multiple languages with CodeFount.",
     images: ["https://codefount.vercel.app/og-image.png"],
-    site: "@your_twitter_handle",
+    site: "@codewitharhan",
   },
   alternates: {
     canonical: "https://codefount.vercel.app",
