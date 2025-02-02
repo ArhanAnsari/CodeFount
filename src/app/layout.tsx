@@ -100,7 +100,7 @@ export default function RootLayout({
       <head>
       <meta name="google-site-verification" content="yv5OwqcQnHndQ4dAqAQuQeCRAs_3KAyhsJiHSyHpUQ0" />
       <meta name="msvalidate.01" content="CAB236663CA687B7AE6F7F906D3DD14E" />
-      <meta name="yandex-verification" content="91781b197f69fc93">
+      <meta name="yandex-verification" content="91781b197f69fc93" />
       </head>
         <body
           suppressHydrationWarning={true}
