@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   description:
     "CodeFount is a powerful online code editor and compiler supporting multiple languages. Share, run, and collaborate on code snippets easily.",
   keywords: [
+    "CodeFount",
+    "Code Fount",
+    "codefount",
+    "code fount",
     "online code editor",
     "code compiler",
     "JavaScript IDE",
