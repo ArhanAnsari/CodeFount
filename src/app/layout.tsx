@@ -33,38 +33,61 @@ export const metadata: Metadata = {
     "code snippets",
     "programming",
     "code sharing",
+    "Next.js 15",
+    "React 19",
+    "web development",
+    "AI-powered IDE",
+    "Gemini AI integration",
   ],
-  metadataBase: new URL("https://codefount.com"),
+  metadataBase: new URL("https://codefount.vercel.app"),
   openGraph: {
     title: "CodeFount - Online Code Editor & Compiler",
     description:
       "Run, share, and collaborate on code snippets in multiple languages with CodeFount.",
-    url: "https://codefount.com",
+    url: "https://codefount.vercel.app",
     siteName: "CodeFount",
     images: [
       {
-        url: "https://codefount.com/og-image.png",
+        url: "https://codefount.vercel.app/og-image.png",
         width: 1200,
         height: 630,
         alt: "CodeFount - Online Code Editor & Compiler",
       },
     ],
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "CodeFount - Online Code Editor & Compiler",
     description:
       "Run, share, and collaborate on code snippets in multiple languages with CodeFount.",
-    images: ["https://codefount.com/og-image.png"],
+    images: ["https://codefount.vercel.app/og-image.png"],
+    site: "@codewitharhan",
   },
   alternates: {
-    canonical: "https://codefount.com",
+    canonical: "https://codefount.vercel.app",
   },
+  verification: {
+    google: "YOUR_GOOGLE_VERIFICATION_CODE",
+    bing: "CAB236663CA687B7AE6F7F906D3DD14E",
+    yandex: "91781b197f69fc93",
+  },
+  icons: {
+    shortcut: "/favicon.ico", // Keeps the default Next.js favicon
+  },
+  manifest: "/site.webmanifest",
   other: {
     "robots": "index, follow",
     "theme-color": "#1e1e2e",
+    "color-scheme": "dark",
     "author": "Arhan Ansari",
+    "creator": "Arhan Ansari",
+    "publisher": "CodeFount",
+    "rating": "general",
+    "og:updated_time": new Date().toISOString(),
+    "language": "English",
+    "revisit-after": "7 days",
   },
 };
 
