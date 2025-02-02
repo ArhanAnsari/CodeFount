@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     canonical: "https://codefount.vercel.app",
   },
   verification: {
-    google: "YOUR_GOOGLE_VERIFICATION_CODE",
+    google: "yv5OwqcQnHndQ4dAqAQuQeCRAs_3KAyhsJiHSyHpUQ0",
     bing: "CAB236663CA687B7AE6F7F906D3DD14E",
     yandex: "91781b197f69fc93",
   },
@@ -97,6 +97,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+      <head>
+      <meta name="google-site-verification" content="yv5OwqcQnHndQ4dAqAQuQeCRAs_3KAyhsJiHSyHpUQ0" />
+      <meta name="msvalidate.01" content="CAB236663CA687B7AE6F7F906D3DD14E" />
+      <meta name="yandex-verification" content="91781b197f69fc93">
+      </head>
         <body
           suppressHydrationWarning={true}
           className={`${geistSans.variable} ${geistMono.variable} ${karla.className} antialiased min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 text-gray-100 flex flex-col`}
