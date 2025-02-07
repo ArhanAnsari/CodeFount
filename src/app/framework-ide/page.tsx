@@ -1,4 +1,6 @@
 // src/app/framework-ide/page.tsx
+"use client";
+
 import Editor from "./_components/Editor";
 import FrameworkSelector from "./_components/FrameworkSelector";
 import LivePreview from "./_components/LivePreview";
