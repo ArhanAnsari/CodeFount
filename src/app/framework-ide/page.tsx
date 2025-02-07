@@ -8,7 +8,7 @@ import FileTree from "./_components/FileTree";
 import AIButton from "./_components/AIButton";
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "convex/react";
-import { getFrameworkCode, saveFrameworkCode } from "@/convex/frameworks";
+import { getFrameworkCode, saveFrameworkCode } from "./../../convex/frameworks";
 import { useUser } from "@clerk/nextjs";
 
 export default function FrameworkIDE() {
