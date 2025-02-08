@@ -50,4 +50,10 @@ export default defineSchema({
     js: v.optional(v.string()),
     updatedAt: v.number(), // Timestamp
   }).index("by_user_id", ["userId"]),
+
+  frameworks: defineTable({
+    framework: v.string(),
+    userId: v.string(),
+    files: v.json(),
+  }).index("by_user_id_and_framework", ["userId", "framework"]),
 });
