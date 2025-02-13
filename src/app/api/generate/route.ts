@@ -1,19 +1,21 @@
 // app/api/generate/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 
 // Define the model and API key
 const MODEL_NAME = "gemini-1.5-pro";
-const API_KEY = process.env.GEMINI_API_KEY as string;
+const API_KEY = process.env.GEMINI_API_KEY;
+
+if (!API_KEY) {
+  throw new Error("Gemini API key is missing.");
+}
+
+// Initialize Google Generative AI client
+const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Function to call Google Generative AI (Gemini) API
 async function runChat(prompt: string): Promise<string> {
-  if (!API_KEY) {
-    throw new Error("Gemini API key is missing.");
-  }
-
   try {
-    const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
     const generationConfig = {
@@ -42,14 +44,18 @@ async function runChat(prompt: string): Promise<string> {
       },
     ];
 
-    const chat = model.startChat({
+    // Generate content from AI
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
       generationConfig,
       safetySettings,
-      history: [],
     });
 
-    const result = await chat.sendMessage(prompt);
-    return result.response.text();
+    // Extract text response
+    const generatedText =
+      result.response?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from AI";
+
+    return generatedText;
   } catch (error) {
     console.error("Error generating AI content with Gemini:", error);
     throw new Error("AI content generation failed.");

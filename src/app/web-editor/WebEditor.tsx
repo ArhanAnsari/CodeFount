@@ -57,7 +57,7 @@ export default function WebEditor() {
   // AI Suggestion Function
   const handleAISuggest = async () => {
     const code = activeTab === "HTML" ? html : activeTab === "CSS" ? css : js;
-    const prompt = `Improve the following ${activeTab} code:\n\n${code}`;
+    const prompt = `Improve the following ${activeTab} code and return only the optimized ${activeTab} code without explanation:\n\n${code}`;
     setLoading(true);
     try {
       const response = await fetch("/api/generate", {
@@ -71,7 +71,7 @@ export default function WebEditor() {
       setAiSuggestion(data.generatedContent || "No suggestion available.");
     } catch (error) {
       console.error("AI Suggestion Error:", error);
-      setAiSuggestion("AI suggestion failed. Please try again.");
+      setAiSuggestion("AI suggestion failed. Please try again or check the API connection.");    
     } finally {
       setLoading(false);
     }

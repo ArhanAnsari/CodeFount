@@ -48,31 +48,32 @@ function EditorPanel() {
 
   const handleAISuggestions = async () => {
     if (!editor) return;
-
+  
     setLoadingAI(true);
     const userCode = editor.getValue();
-
+    const prompt = `Improve the following ${language} code:\n\n${userCode}`;
+  
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ code: userCode, language }),
+        body: JSON.stringify({ prompt }), // Corrected format
       });
-
+  
       if (!response.ok) throw new Error("Failed to fetch AI suggestions");
-
+  
       const data = await response.json();
-      const aiSuggestion = data.suggestion || "// No AI suggestion available";
-
+      const aiSuggestion = data.generatedContent || "// No AI suggestion available";
+  
       editor.setValue(aiSuggestion);
     } catch (error) {
       console.error("AI Suggestion Error:", error);
     } finally {
       setLoadingAI(false);
     }
-  };
+  };  
 
   if (!mounted) return null;
 
